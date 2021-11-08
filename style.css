@@ -68,7 +68,7 @@ html, body{
 }
 
 
-.modal.fade .modal-footer{
+.modal.fade #excursionModal .modal-footer, .modal.fade #data_accModal .modal-footer{
 	border-top: none;
 }
 
