@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=9a3a56a6-f665-417b-87b2-b0df644b6e8c&lang=ru_RU&mode=debug" type="text/javascript">
+    </script>
     <link rel="icon" href="svg\a.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
@@ -75,11 +77,11 @@
                                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword">Пароль</label>
                             </div>
-                            <div class="form-floating">
+                            <div class="form-floating mb-3">
                                 <input type="password" class="form-control" id="floatingPassword" placeholder="name@example.com">
                                 <label for="floatingInput">Повторите пароль</label>
                             </div>
-                            <div class="mb-2 mt-3 d-flex justify-content-center">
+                            <div class="mb-5 mt-3 d-flex justify-content-center">
                                 <div class="form-check form-check-inline radBut1">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                     <label class="form-check-label" for="inlineRadio1">Покупатель</label>
@@ -89,7 +91,12 @@
                                     <label class="form-check-label" for="inlineRadio2">Экскурсовод</label>
                                   </div>
                             </div>
-                           
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                  Нажимая кнопку "Регистрация", вы даёте <a href="#">согласие на обработку персональных данных.</a>
+                                </label>
+                            </div>
                         </div>
                         <div class="modal-footer" id="buttonReg">            
                                 <button type="button" class="btn btn-primary btn-block butReg" data-bs-dismiss="modal" aria-label="Close">Регистрация</button>                                           
@@ -103,8 +110,8 @@
             
         </nav>
         <div class="map" >
-            
-            <img class="map_api" id="mapApi" src="image/map.png" onclick="alert('Регистрация')" width="1384" height="836" alt="Map">
+            <div class="map_api" id="mapApi" width="1384" height="836" alt="Map">
+            </div>
         </div>
         <div class="why_we">
            
@@ -123,5 +130,23 @@
       </div>
       <script src="../index.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-</body>
+      <script type="text/javascript">
+        // Функция ymaps.ready() будет вызвана, когда
+        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+        ymaps.ready(init);
+        function init(){
+            // Создание карты.
+            var myMap = new ymaps.Map("mapApi", {
+                // Координаты центра карты.
+                // Порядок по умолчанию: «широта, долгота».
+                // Чтобы не определять координаты центра карты вручную,
+                // воспользуйтесь инструментом Определение координат.
+                center: [59.939098, 30.315868],
+                // Уровень масштабирования. Допустимые значения:
+                // от 0 (весь мир) до 19.
+                zoom: 11
+            });
+        }
+      </script>
+    </body>
 </html>

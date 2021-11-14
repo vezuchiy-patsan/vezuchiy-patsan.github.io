@@ -72,6 +72,28 @@ html, body{
 	border-top: none;
 }
 
+.mainSide #exc_newModal .modal-dialog{
+	width: 1330px ;
+    
+}
+
+
+.mainSide #exc_newModal .modal-dialog{
+	width: 1330px ;
+    
+}
+
+.mainSide #exc_newModal .form_forInput{
+	align-items: center ;
+    
+}
+
+
+#exc_newModal #mapApi_order{
+	width: 682px ;
+    height: 413px ;
+}
+
 
 .log_in button.btn{
 	width:145px;
@@ -83,6 +105,58 @@ html, body{
 	width:145px;
 	height:52px;
 	border-radius: 10px;
+}
+
+.mainSide .account_side {
+	z-index: 1;
+	
+}
+
+.mainSide .account_side div.d-flex{
+	justify-content: flex-end;
+    align-items: center;
+}
+
+.mainSide .account_side p{
+	margin-right: 55px;
+}
+
+.mainSide .account_side .arrow-8 {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    margin: 5px 0 0 0;
+}
+.mainSide .account_side .arrow-8:before,
+.mainSide .account_side .arrow-8:after {
+    content: '';
+    position: absolute;
+    width: 47%;
+    height: 47%;
+    border-left: 3px solid #337AB7;
+    border-bottom: 3px solid #337AB7;
+    animation: arrow-8 2s linear infinite;
+}
+.mainSide .account_side .arrow-8:after {
+	box-sizing:none;
+    animation: arrow-8 2s linear infinite 1.5s;
+}
+@keyframes arrow-8 {
+    0% {
+        opacity: 0;
+        transform: translate(0, -12px) rotate(-45deg);
+    }
+    10%, 90% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;  
+        transform: translate(0, 0) rotate(-45deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(0, 12px) rotate(-45deg);
+    }
 }
 
 .account_side .accountButton{

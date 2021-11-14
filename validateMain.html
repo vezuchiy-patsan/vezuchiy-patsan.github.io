@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=9a3a56a6-f665-417b-87b2-b0df644b6e8c&lang=ru_RU&mode=debug" type="text/javascript">
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
@@ -55,7 +57,10 @@
                 <div class="account_side">
                     <div>
                         <button class="btn btn-light accountButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_accountSide" aria-expanded="false" aria-controls="collapse_accountSide">
-                          Фамилия Имя
+                          <div class="d-flex">
+                            <p class="">Фамилия Имя</p>
+                            <div class="arrow-8"></div>
+                          </div>
                         </button>
                       </div>
                       <div class="collapse" id="collapse_accountSide">
@@ -162,7 +167,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="modal-body">
-                          <div id="carouselPhotoControls" class="carousel slide mb-3" data-bs-ride="carousel">
+                         <!--  <div id="carouselPhotoControls" class="carousel slide mb-3" data-bs-ride="carousel">
                             <div class="carousel-inner">
                               <div class="carousel-item active">
                                 <img src="image\foto.jpg" class="d-block w-100" alt="...">
@@ -182,7 +187,7 @@
                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Следующий</span>
                             </button>
-                          </div>
+                          </div> -->
                           <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="Иван">
                             <label for="floatingInput">Имя</label>
@@ -211,11 +216,18 @@
                   </div>
                 </div>
             </div>
-            <a role="button" href="#" data-bs-toggle="modal" data-bs-target="#orderModal"><img class="map_api" id="mapApi" src="image/map.png" width="1384" height="836" alt="Map"></a>
+            
+              <div class="map_api" id="mapApi" width="1384" height="836" alt="Map">
+              </div>
         </div>
+        
         <div class="why_we">
             
             <div class="line"></div>
+
+            <div class="container button_forOrder">
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#orderModal">Заказать</button>
+            </div>
         </div>
        
         <footer>
@@ -229,5 +241,23 @@
         </footer>
       <script src="../index.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-</body>
+      <script type="text/javascript">
+        // Функция ymaps.ready() будет вызвана, когда
+        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+        ymaps.ready(init);
+        function init(){
+            // Создание карты.
+            var myMap = new ymaps.Map("mapApi", {
+                // Координаты центра карты.
+                // Порядок по умолчанию: «широта, долгота».
+                // Чтобы не определять координаты центра карты вручную,
+                // воспользуйтесь инструментом Определение координат.
+                center: [59.939098, 30.315868],
+                // Уровень масштабирования. Допустимые значения:
+                // от 0 (весь мир) до 19.
+                zoom: 11
+            });
+        }
+      </script>
+  </body>
 </html>

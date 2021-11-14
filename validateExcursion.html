@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=9a3a56a6-f665-417b-87b2-b0df644b6e8c&lang=ru_RU" type="text/javascript">
+    </script>
     <link rel="stylesheet" href="daterangepicker/daterangepicker.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
@@ -55,9 +57,13 @@
                 </div>
                 <div class="account_side">
                     <div>
-                        <button class="btn btn-light accountButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_accountSide" aria-expanded="false" aria-controls="collapse_accountSide">
-                          Фамилия Имя
+                        <button class="btn btn-light accountButton " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_accountSide" aria-expanded="false" aria-controls="collapse_accountSide">
+                          <div class="d-flex">
+                            <p class="">Фамилия Имя</p>
+                            <div class="arrow-8"></div>
+                          </div>
                         </button>
+                        
                       </div>
                       <div class="collapse" id="collapse_accountSide">
                         <div class="card card-body mt-3" >
@@ -91,6 +97,7 @@
                             <th scope="col">Цена (рублей)</th>
                             <th scope="col">Экскурсовод</th>
                             <th scope="col">Номер экскурсовода</th>
+                            <th scope="col">Дата</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -102,7 +109,7 @@
                             <td>150</td>
                             <td>Михайлов</td>
                             <td>89523461702</td>
-                            <th scope="col">Дата</th>
+                            <td>22.10.2021</td>
                           </tr>
                           <tr>
                             <th scope="row">2</th>
@@ -129,43 +136,40 @@
                 </div>
                 <div class="modal-body d-flex">
                   <div class="container ">
-                    <div class="row ">
+                    <div class="row form_forInput">
                       <div class="col">
-                        <img src="image\map.png" alt="карта" onclick="alert('Адрес')">
+                        <div class="map_api" id="mapApi_order" alt="Map"></div>
                       </div>
                       <div class="col">
-                        <div class="input-group mb-3">
-                          <span class="input-group-text" id="basic-addon1">Название</span>
+                        <div class="mb-3">
+                          <label class="form-label" id="basic-addon1">Название</label>
                           <input type="text" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
                         </div>
-                        <div class="input-group mb-3">
-                          <span  class="input-group-text" id="basic-addon2">Адрес</span>
+                        <div class="mb-3">
+                          <label  class="form-label" id="basic-addon2">Адрес</label>
                           <input type="text" class="form-control" id="validationAddress"  placeholder="" aria-label="Address" aria-describedby="basic-addon2" required>
                           <div class="invalid-feedback">
                            Укажите действующий город.
                          </div> 
                         </div>
-                        <div class="input-group mb-3">
-                          <span class="input-group-text">Описание</span>
+                        <div class="mb-3">
+                          <label class="form-label">Описание</label>
                           <textarea class="form-control" aria-label="With textarea"></textarea>
                         </div>
-                        <div class="input-group mb-3">
-                          <span class="input-group-text">₽</span>
-                          <span class="input-group-text">0.00</span>
-                          <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                        <div class="mb-3">
+                          <label class="form-label">Цена</label>
+                          <div class="input-group mb-3">
+                            <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                            <span class="input-group-text ">₽</span>
+                          </div>
                         </div>
-                          <div class='input-group mb-5' id='datetimepicker1'>
-                            <span class="input-group-text">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
-                                <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                              </svg>
-                            </span>
-                              <input type="date" class="form-control" id="dating" name="date" placeholder="Дата" required>
+                          <div class='mb-5' id='datetimepicker1'>
+                            <label class="form-label">Дата</label>
+                            <input type="date" class="form-control" id="dating" name="date" placeholder="Дата" required>
                             </div>
                             <div class="input-group pt-5">
                               <input type="file" class="form-control " id="inputGroupFile02" multiple>
-                              <label class="input-group-text" for="inputGroupFile02">Загрузить</label>
+                              <label class="input-group-text " for="inputGroupFile02">Загрузить</label>
                             </div>
                       </div>
                     </div>
@@ -214,7 +218,7 @@
         </div>
         <div class="map">
             <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-dialog modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="orderModalLabel">Заказ</h5>
@@ -222,7 +226,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="modal-body">
-                          <div id="carouselPhotoControls" class="carousel slide mb-3" data-bs-ride="carousel">
+                          <!-- <div id="carouselPhotoControls" class="carousel slide mb-3" data-bs-ride="carousel">
                             <div class="carousel-inner">
                               <div class="carousel-item active">
                                 <img src="image\foto.jpg" class="d-block w-100" alt="...">
@@ -242,7 +246,7 @@
                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Следующий</span>
                             </button>
-                          </div>
+                          </div> -->
                           <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="Иван">
                             <label for="floatingInput">Имя</label>
@@ -271,11 +275,16 @@
                   </div>
                 </div>
             </div>
-            <a role="button" href="#" data-bs-toggle="modal" data-bs-target="#orderModal"><img class="map_api" id="mapApi" src="image/map.png" width="1384" height="836" alt="Map"></a>
+            <div class="map_api" id="mapApi" width="1384" height="836" alt="Map">
+
+            </div>
         </div>
         <div class="why_we">
             
-            <div class="line"></div>
+          <div class="line"></div>
+          <div class="container button_forOrder">
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#orderModal">Заказать</button>
+          </div>
         </div>       
         <footer>
             <div class="footer">
@@ -302,6 +311,43 @@
           );
         });
       </script>
-    
+      <script type="text/javascript">
+        // Функция ymaps.ready() будет вызвана, когда
+        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+        ymaps.ready(init);
+        function init(){
+            // Создание карты.
+            var myMap = new ymaps.Map("mapApi", {
+                // Координаты центра карты.
+                // Порядок по умолчанию: «широта, долгота».
+                // Чтобы не определять координаты центра карты вручную,
+                // воспользуйтесь инструментом Определение координат.
+                center: [59.939098, 30.315868],
+                // Уровень масштабирования. Допустимые значения:
+                // от 0 (весь мир) до 19.
+                zoom: 11
+            });
+        }
+      </script>
+      <script type="text/javascript">
+        var myMap,
+        bigMap = false;
+        // Функция ymaps.ready() будет вызвана, когда
+        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+        ymaps.ready(init);
+        function init(){
+            // Создание карты.
+            var myMap = new ymaps.Map("mapApi_order", {
+                // Координаты центра карты.
+                // Порядок по умолчанию: «широта, долгота».
+                // Чтобы не определять координаты центра карты вручную,
+                // воспользуйтесь инструментом Определение координат.
+                center: [59.939098, 30.315868],
+                // Уровень масштабирования. Допустимые значения:
+                // от 0 (весь мир) до 19.
+                zoom: 11
+            });
+        }
+      </script>
     </body>
 </html>
