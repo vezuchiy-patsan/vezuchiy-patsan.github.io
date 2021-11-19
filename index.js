@@ -7,7 +7,6 @@ function init(){
     //занесём имя файла
     var fileName = document.documentURI;
     let massiveUrl = fileName.split('/');
-    alert(massiveUrl[massiveUrl.length-1]);
     // Создание карты.
   
 
