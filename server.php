@@ -1,3 +1,5 @@
-<script>
-    alert("Это сообщение");
-</script>
+<?php
+$pidor = "Леха интер пидор";
+for($i = 0; $i <= 10; $i = $i+1){
+    print($pidor. " " .$i." - раз");
+};
