@@ -70,7 +70,7 @@
                             <div class="btn-group-vertical" id="buttonGroup" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-outline-dark mb-2" data-bs-toggle="modal" data-bs-target="#data_accModal">Редактировать данные</button>
                                 <button type="button" class="btn btn-outline-dark mb-2" data-bs-toggle="modal" data-bs-target="#exc_newModal">Создать экскурсию</button>
-                                <button type="button" class="btn btn-outline-dark mb-5" data-bs-toggle="modal" data-bs-target="#excursionModal">История покупок</button>
+                                <button type="button" class="btn btn-outline-dark mb-5" data-bs-toggle="modal" data-bs-target="#excursionModal">История заказов</button>
                                 <a role="button" class="btn btn-outline-dark" href="./index.html">Выйти</a>
                               </div>
                         </div>
@@ -83,7 +83,7 @@
             <div class="modal-dialog .modal-dialog-scrollable modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="excursionModalLabel">История покупок</h5>
+                  <h5 class="modal-title" id="excursionModalLabel">История заказов</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body table-responsive">
@@ -95,8 +95,8 @@
                             <th scope="col">Адрес</th>
                             <th scope="col">Кол-во билетов</th>
                             <th scope="col">Цена (рублей)</th>
-                            <th scope="col">Экскурсовод</th>
-                            <th scope="col">Номер экскурсовода</th>
+                            <th scope="col">Клиент</th>
+                            <th scope="col">Номер клиента</th>
                             <th scope="col">Дата</th>
                           </tr>
                         </thead>
@@ -311,55 +311,6 @@
           );
         });
       </script>
-      <script type="text/javascript">
-        // Функция ymaps.ready() будет вызвана, когда
-        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-        ymaps.ready(init);
-        function init(){
-            // Создание карты.
-            var myMap = new ymaps.Map("mapApi", {
-                // Координаты центра карты.
-                // Порядок по умолчанию: «широта, долгота».
-                // Чтобы не определять координаты центра карты вручную,
-                // воспользуйтесь инструментом Определение координат.
-                center: [59.939098, 30.315868],
-                // Уровень масштабирования. Допустимые значения:
-                // от 0 (весь мир) до 19.
-                zoom: 11
-            },{
-        // Зададим ограниченную область прямоугольником, 
-        // примерно описывающим Санкт-Петербург.
-        restrictMapArea: [
-          [59.729409, 29.862390],
-          [60.196089, 30.905570]
-        ]});
-        }
-      </script>
-      <script type="text/javascript">
-        var myMap,
-        bigMap = false;
-        // Функция ymaps.ready() будет вызвана, когда
-        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-        ymaps.ready(init);
-        function init(){
-            // Создание карты.
-            var myMap = new ymaps.Map("mapApi_order", {
-                // Координаты центра карты.
-                // Порядок по умолчанию: «широта, долгота».
-                // Чтобы не определять координаты центра карты вручную,
-                // воспользуйтесь инструментом Определение координат.
-                center: [59.939098, 30.315868],
-                // Уровень масштабирования. Допустимые значения:
-                // от 0 (весь мир) до 19.
-                zoom: 11
-            },{
-        // Зададим ограниченную область прямоугольником, 
-        // примерно описывающим Санкт-Петербург.
-        restrictMapArea: [
-          [59.729409, 29.862390],
-          [60.196089, 30.905570]
-        ]});
-        }
-      </script>
+
     </body>
 </html>
