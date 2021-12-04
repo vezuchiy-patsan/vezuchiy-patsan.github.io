@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,13 +30,14 @@
                               <h5 class="modal-title" id="titleModalLabel">Вход</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
+                            <form action="auth.php" method="post">
                             <div class="modal-body">
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name='login'>
                                     <label for="floatingInput">Email</label>
                                   </div>
                                   <div class="form-floating">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name='password'>
                                     <label for="floatingPassword">Пароль</label>
                                   </div>
                             </div>
@@ -44,6 +45,7 @@
                                 <a  role="button" type="button" href="validateMain.html" class="btn btn-primary butIn">Войти</a>                                           
                                 <a  role="button" type="button" href="validateExcursion.html" class="btn btn-primary butIn">Экскурсия</a>                                           
                             </div>
+                            </form>
                           </div>
                         </div>
                     </div>
@@ -66,7 +68,7 @@
                                     <label for="floatingInput">Имя</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="Иванович" name="SurName">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="Иванович" name="FirstName1">
                                     <label for="floatingInput">Фамилия</label>
                                 </div>
                                 <div class="form-floating mb-3">
@@ -100,9 +102,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer" id="buttonReg">
-                                
-                                    <button type="submit" class="btn btn-primary btn-block butReg" data-bs-dismiss="modal" aria-label="" name="submit" >Регистрация</button> 
-                                   
+                                    <button type="submit" class="btn btn-primary btn-block butReg" data-bs-dismiss="modal" aria-label="" name="submit" >Регистрация</button>   
                             </div>
                          </form> 
                       </div>
@@ -119,29 +119,13 @@
         </div>
         <div class="why_we">
             <div class="line"></div>
-            
-                <div>
-                    <div>
-                        <input type="text" name="semen1" >
-                    </div>
-                    
-                </div>
-                <div>
-                    <div>
-                        <form action="semen.php" method="post" id="cum">
-                            <button type="submit" name="submit">But</button>
-                        </form>
-                    </div>
-                    
-                </div>
-            
         </div>
         <footer>
             <div class="footer" >
                 <div class="data_footer">
                     <div class="item"></div>
                     <div class="name_author item"><p>@Ахиян Д.Г.</p></div>
-                    <div class="email item"><p  >roofSPB@mail.ru</p></div>
+                    <div class="email item"><p>roofSPB@mail.ru</p></div>
                 </div>
             </div>
         </footer>
