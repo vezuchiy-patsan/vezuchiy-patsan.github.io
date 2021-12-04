@@ -61,48 +61,55 @@
                           <h5 class="modal-title" id="title_regModalLabel">Регистрация</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="reg_sub" method="post" action="server.php"> 
+                       <!--  method="post" action="server.php" -->
+                        <form id="reg_sub"  class="needs-validation form_reg" novalidate> 
                             <div class="modal-body">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="Иван" name="FirstName">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="Иван" name="FirstName" required>
                                     <label for="floatingInput">Имя</label>
+                                    <div class="invalid-feedback">Укажите имя</div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="Иванович" name="FirstName1">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="Иванович" name="FirstName1" required>
                                     <label for="floatingInput">Фамилия</label>
+                                    <div class="invalid-feedback">Укажите фамилию</div>
                                 </div>
                                 <div class="form-floating mb-3">
                                     
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="login">
+                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="login" required>
                                     <label for="floatingInput">Email</label>
+                                    <div class="invalid-feedback">Укажите email</div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                                    <input type="password" class="form-control" id="floatingPassword password" placeholder="Password" name="password" required>
                                     <label for="floatingPassword">Пароль</label>
+                                    <div class="invalid-feedback">Укажите пароль</div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="name@example.com">
-                                    <label for="floatingInput">Повторите пароль</label>
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="name@example.com" id="r_password" required>
+                                    <label for="floatingPassword">Повторите пароль</label>
+                                    <div class="invalid-feedback">Повторите пароль</div>
                                 </div>
                                 <div class="mb-3 mt-3 d-flex justify-content-center">
                                     <div class="form-check form-check-inline radBut1">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" required>
                                         <label class="form-check-label" for="inlineRadio1">Покупатель</label>
                                     </div>
                                     <div class="form-check form-check-inline radBut2">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" >
                                         <label class="form-check-label" for="inlineRadio2">Экскурсовод</label>
                                     </div>
+                                    
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="politics" >
+                                    <input class="form-check-input" type="checkbox" value="" id="politics" required>
                                     <label class="form-check-label" for="politics" >
                                     Нажимая кнопку "Регистрация", вы даёте <a href="#">согласие на обработку персональных данных.</a>
                                     </label>
                                 </div>
                             </div>
-                            <div class="modal-footer" id="buttonReg">
-                                    <button type="submit" class="btn btn-primary btn-block butReg" data-bs-dismiss="modal" aria-label="" name="submit" >Регистрация</button>   
+                            <div class="modal-footer" id="buttonReg"> 
+                                    <button type="submit" class="btn btn-primary btn-block butReg" name="submit" >Регистрация</button>   
                             </div>
                          </form> 
                       </div>
@@ -131,6 +138,7 @@
         </footer>
       </div>
       <script src="../index.js"></script>
+      <script src="../validate.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
         
     </body>
