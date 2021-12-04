@@ -49,6 +49,13 @@ if (isset($_POST['password'])) {
         unset($password);
     } 
 }
+if (isset($_POST['inlineRadioOptions'])) {
+    $Radio = $_POST['inlineRadioOptions'];
+}
+
+echo "<h2>$Radio</h2>";
+
+
 
 if (empty($login) or empty($password)) //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем
 {
@@ -56,7 +63,7 @@ if (empty($login) or empty($password)) //если пользователь не 
     $new_url = 'http://akhiyan.ml.ml/index.html';
     header('Location: '.$new_url);
     ob_end_flush(); */
-    exit ('Лох');
+    exit ('не ввел логин или пароль');
 }
 //если логин и пароль введены, то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
 $login = stripslashes($login);
@@ -74,6 +81,7 @@ $password = htmlspecialchars($password);
 
 $login = trim($login);
 $password = trim($password);
+
 
 //подключение бд
 require("connect.php");
@@ -93,7 +101,7 @@ if(!empty($result['id'])){
 
 //сохраняем новые данные
 $sql = "INSERT INTO log_Account (login, pass) VALUES ('$login','$password')";
-$sql1 = "INSERT INTO account (FirstName, SurName, type) VALUES ('$FirstName','$Surname', 1)";
+$sql1 = "INSERT INTO account (FirstName, SurName, type) VALUES ('$FirstName','$Surname', '$Radio')";
 
 if((mysqli_query($conn, $sql1)) and (mysqli_query($conn, $sql))){
     echo "Данные успешно добавлены";

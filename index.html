@@ -42,8 +42,9 @@
                                   </div>
                             </div>
                             <div class="modal-footer" id="buttonIn">            
-                                <a  role="button" type="button" href="validateMain.html" class="btn btn-primary butIn">Войти</a>                                           
-                                <a  role="button" type="button" href="validateExcursion.html" class="btn btn-primary butIn">Экскурсия</a>                                           
+                                <button type="submit"  class="btn btn-primary butIn" name="submit">Войти</button> 
+                                <!-- <a  role="button" type="button" href="validateMain.html" class="btn btn-primary butIn">Войти</a>                                           
+                                <a  role="button" type="button" href="validateExcursion.html" class="btn btn-primary butIn">Экскурсия</a>   -->                                         
                             </div>
                             </form>
                           </div>
@@ -61,8 +62,8 @@
                           <h5 class="modal-title" id="title_regModalLabel">Регистрация</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                       <!--  method="post" action="server.php" -->
-                        <form id="reg_sub"  class="needs-validation form_reg" novalidate> 
+                        
+                        <form id="reg_sub" method="post" action="server.php" class="needs-validation form_reg" novalidate> 
                             <div class="modal-body">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="floatingInput" placeholder="Иван" name="FirstName" required>
@@ -92,11 +93,11 @@
                                 </div>
                                 <div class="mb-3 mt-3 d-flex justify-content-center">
                                     <div class="form-check form-check-inline radBut1">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" required>
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0" required>
                                         <label class="form-check-label" for="inlineRadio1">Покупатель</label>
                                     </div>
                                     <div class="form-check form-check-inline radBut2">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" >
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1" >
                                         <label class="form-check-label" for="inlineRadio2">Экскурсовод</label>
                                     </div>
                                     
@@ -104,7 +105,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="politics" required>
                                     <label class="form-check-label" for="politics" >
-                                    Нажимая кнопку "Регистрация", вы даёте <a href="#">согласие на обработку персональных данных.</a>
+                                    Нажимая кнопку "Регистрация", вы даёте <a href="/Privicy_policy.html">согласие на обработку персональных данных.</a>
                                     </label>
                                 </div>
                             </div>
@@ -126,6 +127,10 @@
         </div>
         <div class="why_we">
             <div class="line"></div>
+            <form action="1.php" method="post">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions rad" id="inlineRadio1" value="option">
+                <button type="submit" name="submit">Sub</button>
+            </form>
         </div>
         <footer>
             <div class="footer" >
