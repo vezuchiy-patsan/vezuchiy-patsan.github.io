@@ -1,5 +1,6 @@
 <?php
-
+$urlCl="/validateMain.php";
+$urlEx="/validateExcursion.php";
 header("Content-Type: text/html; charset=UTF-8");
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -53,9 +54,11 @@ if ($myrow['pass']==$password) {
     $_SESSION['login']=$myrow['login']; 
     $_SESSION['id']=$myrow['id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
     if ($sqlID != 1){
-        echo "Вы успешно вошли на сайт! <a href='validateExcursion.html'>Главная страница</a>";
+        /* echo "Вы успешно вошли на сайт! <a href='validateExcursion.html'>Главная страница</a>"; */
+        header("Location:" .$urlCl);
     }else{
-        echo "Вы успешно вошли на сайт! <a href='validateMain.html'>Главная страница</a>";
+        header("Location:" .$urlExc);
+        /* echo "Вы успешно вошли на сайт! <a href='validateMain.html'>Главная страница</a>"; */
     };
     
 

@@ -113,13 +113,11 @@ html, body{
 }
 
 .mainSide .account_side div.d-flex{
-	justify-content: flex-end;
+	justify-content: space-between;
     align-items: center;
 }
 
-.mainSide .account_side p{
-	margin-right: 55px;
-}
+
 
 .mainSide .account_side .arrow-8 {
     position: relative;
