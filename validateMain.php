@@ -59,10 +59,9 @@
                     <div>
                         <button class="btn btn-light accountButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_accountSide" aria-expanded="false" aria-controls="collapse_accountSide">
                           <div class="d-flex">
-                          <?php 
-                          $login = $_SESSION['login'];
-                          echo ("<p>$login crasgsd</p>") ?>
-                            <p class=""></p>
+                          <p class=""><?php 
+                          $login = $_SESSION['FirstName'];
+                          echo ("<p class='m-0'>$login</p>") ?></p>
                             <div class="arrow-8"></div>
                           </div>
                         </button>

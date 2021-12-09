@@ -117,7 +117,9 @@ html, body{
     align-items: center;
 }
 
-
+.mainSide .account_side div.d-flex p {
+    margin-right: 0;
+}
 
 .mainSide .account_side .arrow-8 {
     position: relative;
