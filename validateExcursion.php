@@ -74,7 +74,7 @@
                                 <button type="button" class="btn btn-outline-dark mb-2" data-bs-toggle="modal" data-bs-target="#data_accModal">Редактировать данные</button>
                                 <button type="button" class="btn btn-outline-dark mb-2" data-bs-toggle="modal" data-bs-target="#exc_newModal">Создать экскурсию</button>
                                 <button type="button" class="btn btn-outline-dark mb-5" data-bs-toggle="modal" data-bs-target="#excursionModal">История заказов</button>
-                                <a role="button" class="btn btn-outline-dark" href="./index.html">Выйти</a>
+                                <a role="button" class="btn btn-outline-dark" href="close.php">Выйти</a>
                               </div>
                         </div>
                       </div>

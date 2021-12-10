@@ -10,7 +10,7 @@ function init(){
     // Создание карты.
   
 
-    if(massiveUrl[massiveUrl.length-1] == 'validateExcursion.html'){
+    if(massiveUrl[massiveUrl.length-1] == 'validateExcursion.php'){
         var myMap2 = new ymaps.Map( "mapApi_order", {
             // Координаты центра карты.
             // Порядок по умолчанию: «широта, долгота».
@@ -27,7 +27,7 @@ function init(){
         [59.729409, 29.862390],
         [60.196089, 30.905570]
         ]});
-        var myMap1 = new ymaps.Map( "mapApi", {
+        var myMap = new ymaps.Map( "mapApi", {
             // Координаты центра карты.
             // Порядок по умолчанию: «широта, долгота».
             // Чтобы не определять координаты центра карты вручную,
@@ -60,5 +60,22 @@ function init(){
             [59.729409, 29.862390],
             [60.196089, 30.905570]
         ]});
+        
         }
+        // Создание геообъекта с типом точка (метка).
+        var myGeoObject = new ymaps.GeoObject({
+            geometry: {
+                type: "Point", // тип геометрии - точка
+                coordinates: [59.939098, 30.315868] // координаты точки
+            }
+        });
+        myGeoObject.events.add('click', function () {
+            document.getElementById('offcanvasSidep_btn').click(); // вызвать клик на кнопку;
+               
+              
+        });
+        // Размещение геообъекта на карте.
+        myMap.geoObjects.add(myGeoObject); 
+        myMap2.geoObjects.add(myGeoObject); 
+        
 }

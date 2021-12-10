@@ -1,4 +1,6 @@
-<?php session_start() ?>
+<?php 
+
+session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,13 +74,7 @@
                             <div class="btn-group-vertical" id="buttonGroup" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-outline-dark mb-2" data-bs-toggle="modal" data-bs-target="#data_accModal">Редактировать данные</button>
                                 <button type="button" class="btn btn-outline-dark mb-5" data-bs-toggle="modal" data-bs-target="#excursionModal">История покупок</button>
-                                <button type="button" class="btn btn-outline-dark" name="exit">Выйти</button>
-                                <?php if(isset($_GET['exit'])) {
-                                    session_destroy(); 
-                                    #redirect
-                                    header('Location: index.html');
-                                    exit;
-                                    } ?>
+                                <a role="button" class="btn btn-outline-dark" href="close.php" name="exit">Выйти</a>
                               </div>
                         </div>
                       </div>
@@ -227,16 +223,29 @@
                 </div>
             </div>
             
-              <div class="map_api" id="mapApi" width="1384" height="836" alt="Map">
-              </div>
-        </div>
-        
-        <div class="why_we">
+            <div class="map_api" id="mapApi" width="1384" height="836" alt="Map"></div>
             
-            <div class="line"></div>
-
-            <div class="container button_forOrder">
+        </div>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidepanel" aria-labelledby="offcanvasSid">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasSide"><?php echo "Название экскурсии"?></h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div>
+              Какой-то текст в качестве заполнителя. В реальной жизни у вас могут быть элементы, которые Вы выбрали. Нравится, текст, изображения, списки и т. д.
+            </div>
+            <div>
               <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#orderModal">Заказать</button>
+            </div>
+          </div>
+        </div>
+        <div class="why_we">
+            <div class="line"></div>
+            <div class="container button_forOrder">
+              
+              <button class="btn btn-primary" style="display: none;" id="offcanvasSidep_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidepanel" aria-controls="offcanvasSidepanel">
+              </button>
             </div>
         </div>
        

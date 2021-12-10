@@ -48,7 +48,9 @@ exit ("<p>Извините, введённый вами login или парол�
 }
 else {
     $id = $myrow['id'];
-    $sqlID = "SELECT type FROM account WHERE login='$id'";
+    $sqlID = "SELECT type FROM account WHERE id='$id'";
+    $sqlID = mysqli_query($conn, $sqlID);
+    $sqlID = mysqli_fetch_array($sqlID);
     require ("accCache.php");
     //если существует, то сверяем пароли
     if ($myrow['pass']==$password) {
@@ -57,13 +59,11 @@ else {
         $_SESSION['id']=$myrow['id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
         $_SESSION['FirstName']=$accountFirstName;
         $_SESSION['Surname']=$accountSurname;
-        if ($sqlID != 1){
+        if ($sqlID['type'] == 1){
             /* echo "Вы успешно вошли на сайт! <a href='validateExcursion.html'>Главная страница</a>"; */
-            header("Location:" .$urlCl);
-           
-        }else{
             header("Location:" .$urlEx);
-           
+        }else{
+            header("Location:" .$urlCl);
             /* echo "Вы успешно вошли на сайт! <a href='validateMain.html'>Главная страница</a>"; */
         };
         
