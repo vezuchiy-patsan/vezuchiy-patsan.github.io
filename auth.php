@@ -37,6 +37,7 @@ require("connect.php");
 
 $sqlLogin = "SELECT * FROM log_Account WHERE login='$login'";
 
+
 $result = mysqli_query($conn, $sqlLogin); //извлекаем из базы все данные о пользователе с введенным логином
 $myrow = mysqli_fetch_array($result);
 if (empty($myrow['pass']))
@@ -46,25 +47,23 @@ if (empty($myrow['pass']))
 exit ("<p>Извините, введённый вами login или пароль неверный.</p>");
 }
 else {
-    require ('accCache.php');
     $id = $myrow['id'];
-    $Name = $accountFirstName;
-    $Surname = $accountSurname;
-
     $sqlID = "SELECT type FROM account WHERE login='$id'";
+    require ("accCache.php");
     //если существует, то сверяем пароли
     if ($myrow['pass']==$password) {
         //если пароли совпадают, то запускаем пользователю сессию! Можете его поздравить, он вошел!
         $_SESSION['login']=$myrow['login']; 
         $_SESSION['id']=$myrow['id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
-        $_SESSION['FirstName']=$Name;
-        $_SESSION['Surname']=$Surname;
-        
+        $_SESSION['FirstName']=$accountFirstName;
+        $_SESSION['Surname']=$accountSurname;
         if ($sqlID != 1){
             /* echo "Вы успешно вошли на сайт! <a href='validateExcursion.html'>Главная страница</a>"; */
             header("Location:" .$urlCl);
+           
         }else{
-            header("Location:" .$urlExc);
+            header("Location:" .$urlEx);
+           
             /* echo "Вы успешно вошли на сайт! <a href='validateMain.html'>Главная страница</a>"; */
         };
         

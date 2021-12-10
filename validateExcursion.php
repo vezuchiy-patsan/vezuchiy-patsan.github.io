@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
     <link href="./css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./css/media.css">
     <title>Экскурсовод-зашёл</title>
 </head>
@@ -58,8 +59,10 @@
                 <div class="account_side">
                     <div>
                         <button class="btn btn-light accountButton " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_accountSide" aria-expanded="false" aria-controls="collapse_accountSide">
-                          <div class="d-flex">
-                            <p class="">Фамилия Имя</p>
+                          <div class="d-flex justify-content-between">
+                            <p class="me-1"></p>
+                            <p class=""><?php 
+                          echo $_SESSION['FirstName']." ".$_SESSION['FirstName'] ?></p>
                             <div class="arrow-8"></div>
                           </div>
                         </button>

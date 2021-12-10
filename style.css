@@ -112,13 +112,13 @@ html, body{
 	
 }
 
-.mainSide .account_side div.d-flex{
-	justify-content: space-between;
+.mainSide .account_side .d-flex{
+	/* justify-content: space-between; */
     align-items: center;
 }
 
 .mainSide .account_side div.d-flex p {
-    margin-right: 0;
+    /* align-self: center; */
 }
 
 .mainSide .account_side .arrow-8 {
