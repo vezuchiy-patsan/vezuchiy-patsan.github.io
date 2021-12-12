@@ -173,27 +173,7 @@ session_start() ?>
                     </div>
                     <div class="modal-body">
                         <div class="modal-body">
-                         <!--  <div id="carouselPhotoControls" class="carousel slide mb-3" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <img src="image\foto.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="image\foto.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="image\foto.jpg" class="d-block w-100" alt="...">
-                              </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselPhotoControls"  data-bs-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Предыдущий</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselPhotoControls"  data-bs-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Следующий</span>
-                            </button>
-                          </div> -->
+                        
                           <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="Иван">
                             <label for="floatingInput">Имя</label>
@@ -226,20 +206,7 @@ session_start() ?>
             <div class="map_api" id="mapApi" width="1384" height="836" alt="Map"></div>
             
         </div>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidepanel" aria-labelledby="offcanvasSid">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasSide"><?php echo "Название экскурсии"?></h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
-          </div>
-          <div class="offcanvas-body">
-            <div>
-              Какой-то текст в качестве заполнителя. В реальной жизни у вас могут быть элементы, которые Вы выбрали. Нравится, текст, изображения, списки и т. д.
-            </div>
-            <div>
-              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#orderModal">Заказать</button>
-            </div>
-          </div>
-        </div>
+        <?php require('sidePanel.php')?>
         <div class="why_we">
             <div class="line"></div>
             <div class="container button_forOrder">
@@ -254,7 +221,7 @@ session_start() ?>
                 <div class="data_footer">
                     <div class="item"></div>
                     <div class="name_author item"><p>@Ахиян Д.Г.</p></div>
-                    <div class="email item"><p  >roofSPB@mail.ru</p></div>
+                    <div class="email item"><p>roofSPB@mail.ru</p></div>
                 </div>
             </div>
         </footer>

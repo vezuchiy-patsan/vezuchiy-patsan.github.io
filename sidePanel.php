@@ -1,0 +1,51 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidepanel" aria-labelledby="offcanvasSid">
+<div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasSide"><?php echo "Название экскурсии"?></h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+</div>
+<div class="offcanvas-body">
+    <div>
+        <div id="carouselPhotoControls" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <img src="image\foto.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+            <img src="image\foto.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+            <img src="image\foto.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPhotoControls"  data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Предыдущий</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselPhotoControls"  data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Следующий</span>
+        </button>
+        </div>
+    <div>
+        <div class="decrcipt mt-3">
+        <strong class="">Описание</strong>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum autem quisquam ipsa distinctio impedit nulla architecto consequuntur porro exercitationem, ipsam inventore, accusantium pariatur tenetur at eveniet explicabo. Eius, pariatur nulla.</p>
+        </div>
+        <div class="exc mt-3">
+        <strong class="mt-3">Экскурсовод</strong>
+        <p id="excName"></p>
+        <p id="excEmail"></p>
+        <p id="excPhone"></p>
+        </div>
+        <div class="dateTime mt-3">
+        <strong class="mt-3">Дата и время</strong>
+        </div>
+    </div>
+    </div>
+    <div>
+    <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary mt-5 btn-lg" data-bs-toggle="modal" data-bs-target="#orderModal">Заказать</button>
+    </div>
+    </div>
+</div>
+</div>

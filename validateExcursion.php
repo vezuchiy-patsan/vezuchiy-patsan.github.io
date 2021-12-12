@@ -1,4 +1,6 @@
-<?php session_start() ?>
+<?php 
+header("Content-Type: text/html; charset=UTF-8");
+session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,18 +141,20 @@
                 </div>
                 <div class="modal-body d-flex">
                   <div class="container ">
+                  <form method="post" action="validateExcursion.php">
                     <div class="row form_forInput">
                       <div class="col">
                         <div class="map_api" id="mapApi_order" alt="Map"></div>
                       </div>
                       <div class="col">
+                     
                         <div class="mb-3">
                           <label class="form-label" id="basic-addon1">Название</label>
-                          <input type="text" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
+                          <input type="text" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1" name="Name" >
                         </div>
                         <div class="mb-3">
                           <label  class="form-label" id="basic-addon2">Адрес</label>
-                          <input type="text" class="form-control" id="validationAddress"  placeholder="" aria-label="Address" aria-describedby="basic-addon2" required>
+                          <input type="text" class="form-control" id="validationAddress"  placeholder="" aria-label="Address" aria-describedby="basic-addon2" >
                           <div class="invalid-feedback">
                            Укажите действующий город.
                          </div> 
@@ -166,23 +170,48 @@
                             <span class="input-group-text ">₽</span>
                           </div>
                         </div>
-                          <div class='mb-5' id='datetimepicker1'>
-                            <label class="form-label">Дата</label>
-                            <input type="date" class="form-control" id="dating" name="date" placeholder="Дата" required>
-                            </div>
-                            <div class="input-group pt-5">
-                              <input type="file" class="form-control " id="inputGroupFile02" multiple>
-                              <label class="input-group-text " for="inputGroupFile02">Загрузить</label>
-                            </div>
+                        <div class="mb-3">
+                          <label class="form-label">Email</label>
+                          <input type="email" class="form-control" aria-label="Email"></input>
+                        </div><div class="mb-3">
+                          <label class="form-label">Телефон</label>
+                          <input type="text" class="form-control" aria-label="Phone"></input>
+                        </div>
+                        <div class='mb-3' id='datetimepicker1'>
+                          <label class="form-label">Дата</label>
+                          <input type="date" class="form-control" id="dating" name="date" placeholder="Дата" >
+                        </div>
+                        <div class="mt-5 d-flex justify-content-center">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioCahs1" checked  disabled >
+                            <label class="form-check-label" for="flexRadioCahs1">
+                              Наличные
+                            </label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioCash2"  disabled >
+                            <label class="form-check-label" for="flexRadioCash2">
+                              Безналичные
+                            </label>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="input-group pt-5">
+                          <input type="file" class="form-control " id="inputGroupFile02" multiple>
+                          <label class="input-group-text " for="inputGroupFile02">Загрузить</label>
                       </div>
                     </div>
+                    <div class="modal-footer d-block p-0 ">
+                      <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg" name="submitExc">Сохранить</button>
+                      </div>
+                    </div>
+                    </form>
                   </div>
+                 
                 </div>
-                <div class="modal-footer d-block p-0 ">
-                  <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-primary btn-lg">Сохранить</button>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -282,12 +311,14 @@
 
             </div>
         </div>
+        <?php require('sidePanel.php')?>
         <div class="why_we">
             
           <div class="line"></div>
           <div class="container button_forOrder">
-            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#orderModal">Заказать</button>
-          </div>
+              <button class="btn btn-primary" style="display: none;" id="offcanvasSidep_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidepanel" aria-controls="offcanvasSidepanel">
+              </button>
+            </div>
         </div>       
         <footer>
             <div class="footer">
@@ -317,3 +348,7 @@
 
     </body>
 </html>
+
+<?php 
+require('newExcurs.php');
+?>
