@@ -59,6 +59,7 @@ else {
         $_SESSION['id']=$myrow['id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
         $_SESSION['FirstName']=$accountFirstName;
         $_SESSION['Surname']=$accountSurname;
+        $_SESSION['password']=$password;
         if ($sqlID['type'] == 1){
             /* echo "Вы успешно вошли на сайт! <a href='validateExcursion.html'>Главная страница</a>"; */
             header("Location:" .$urlEx);

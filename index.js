@@ -3,14 +3,17 @@
 // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
 ymaps.ready(init);
 
+
+
 function init(){
     var coords = [[59.939098, 30.315868]];
     //занесём имя файла
     var fileName = document.documentURI;
     let massiveUrl = fileName.split('/');
     // Создание карты.
-  
 
+    
+    
     if(massiveUrl[massiveUrl.length-1] == 'validateExcursion.php'){
         var myMap2 = new ymaps.Map( "mapApi_order", {
             // Координаты центра карты.
@@ -81,5 +84,15 @@ function init(){
         // Размещение геообъекта на карте.
         myMap.geoObjects.add(myGeoObject); 
         /* myMap2.geoObjects.add(myGeoObject1); */ 
-        
+        document.querySelector("#submit_newExc").onclick = function(){
+            let adres = document.getElementById('validationAddress').value;
+            var newGeocode = ymaps.geocode('Санкт-Петербург, улица Льва Толстого, 10'/* , {
+                boundedBy: myMap.getBounds(),
+                // Жесткое ограничение поиска указанной областью.
+                strictBounds: true
+            } */);
+            newGeocode.then(function(res){
+                myMap.geoObjects.add(res.geoObjects);
+            });
+        }
 }

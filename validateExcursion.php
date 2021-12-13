@@ -1,13 +1,28 @@
 <?php 
 header("Content-Type: text/html; charset=UTF-8");
-session_start(); ?>
+session_start(); 
+
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+    if(isset($_POST['submitExc'])){
+      ?>
+      <script type="text/javascript">
+        location.replace("validateExcursion.php");
+      </script>
+      <noscript>
+      <meta http-equiv="refresh" content="0; url=validationExcursion.php">
+      </noscript>
+    <?php
     
+    }
+    ?>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=9a3a56a6-f665-417b-87b2-b0df644b6e8c&lang=ru_RU" type="text/javascript">
     </script>
     <link rel="stylesheet" href="daterangepicker/daterangepicker.css">
@@ -64,7 +79,7 @@ session_start(); ?>
                           <div class="d-flex justify-content-between">
                             <p class="me-1"></p>
                             <p class=""><?php 
-                          echo $_SESSION['FirstName']." ".$_SESSION['FirstName'] ?></p>
+                          echo $_SESSION['Surname']." ".$_SESSION['FirstName'] ?></p>
                             <div class="arrow-8"></div>
                           </div>
                         </button>
@@ -141,7 +156,7 @@ session_start(); ?>
                 </div>
                 <div class="modal-body d-flex">
                   <div class="container ">
-                  <form method="post" action="validateExcursion.php">
+                  <form method="post" action="">
                     <div class="row form_forInput">
                       <div class="col">
                         <div class="map_api" id="mapApi_order" alt="Map"></div>
@@ -150,46 +165,46 @@ session_start(); ?>
                      
                         <div class="mb-3">
                           <label class="form-label" id="basic-addon1">Название</label>
-                          <input type="text" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1" name="Name" >
+                          <input type="text" class="form-control" placeholder="Экскурсия..." aria-label="Name" aria-describedby="basic-addon1" name="Name" >
                         </div>
                         <div class="mb-3">
-                          <label  class="form-label" id="basic-addon2">Адрес</label>
-                          <input type="text" class="form-control" id="validationAddress"  placeholder="" aria-label="Address" aria-describedby="basic-addon2" >
+                          <label  class="form-label" id="basic-addon2" >Адрес</label>
+                          <input type="text" class="form-control" id="validationAddress"  placeholder="улица Льва Толстого, 16" aria-label="Address" aria-describedby="basic-addon2" >
                           <div class="invalid-feedback">
                            Укажите действующий город.
                          </div> 
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Описание</label>
-                          <textarea class="form-control" aria-label="With textarea"></textarea>
+                          <textarea class="form-control" aria-label="With textarea" placeholder="короткое описание" name="Discription"></textarea>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label">Цена</label>
+                          <label class="form-label" >Цена</label>
                           <div class="input-group mb-3">
-                            <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-                            <span class="input-group-text ">₽</span>
+                            <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="Price">
+                            <span class="input-group-text">₽</span>
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label">Email</label>
-                          <input type="email" class="form-control" aria-label="Email"></input>
+                          <label class="form-label" >Email</label>
+                          <input type="email" class="form-control" aria-label="Email" name="Email"></input>
                         </div><div class="mb-3">
                           <label class="form-label">Телефон</label>
-                          <input type="text" class="form-control" aria-label="Phone"></input>
+                          <input type="text" class="form-control" aria-label="Phone" name="Phone"></input>
                         </div>
                         <div class='mb-3' id='datetimepicker1'>
-                          <label class="form-label">Дата</label>
-                          <input type="date" class="form-control" id="dating" name="date" placeholder="Дата" >
+                          <label class="form-label" >Дата</label>
+                          <input type="date" class="form-control" id="dating" name="date" placeholder="Дата">
                         </div>
                         <div class="mt-5 d-flex justify-content-center">
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioCahs1" checked  disabled >
+                            <input class="form-check-input" type="radio" name="flexRadioCashless" id="flexRadioCahs1" checked  disabled >
                             <label class="form-check-label" for="flexRadioCahs1">
                               Наличные
                             </label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioCash2"  disabled >
+                            <input class="form-check-input" type="radio" name="flexRadioCashless" id="flexRadioCash2"  disabled >
                             <label class="form-check-label" for="flexRadioCash2">
                               Безналичные
                             </label>
@@ -204,46 +219,68 @@ session_start(); ?>
                     </div>
                     <div class="modal-footer d-block p-0 ">
                       <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg" name="submitExc">Сохранить</button>
+                        <button type="submit" class="btn btn-primary btn-lg" name="submitExc" >Сохранить</button>
                       </div>
                     </div>
                     </form>
+                    
                   </div>
-                 
                 </div>
-                
               </div>
             </div>
-          </div>
+          </div>       
+        <?php 
+          if(isset($_SESSION['result_newExc'])){
+            ?>
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11" data-bs-delay="8000">
+              <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                  <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                  <strong class="me-auto"><?php echo $_SESSION['FirstName']?></strong>
+                  <small>Сейчас</small>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+                </div>
+                <div class="toast-body">
+                  <p><?php echo $_SESSION['result_newExc']?></p>
+                </div>
+              </div>
+            </div>
+           
+        <?php
+            unset($_SESSION['result_newExc']);
+          }
+        ?>
         <div class="data_account">
             <div class="modal fade" id="data_accModal" tabindex="-1" aria-labelledby="data_accModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
+                    <form method="post" action="edit.php">
                     <div class="modal-header ">
                       <h5 class="modal-title" id="data_accModalLabel">Регистрация</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Иван" value="Иван">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Иван" value="<?php echo $_SESSION['FirstName'] ?>" name="NameEd">
                             <label for="floatingInput">Имя</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Иванович" value="Иванов">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Иванович" value="<?php echo $_SESSION['Surname'] ?>" name="SurnameEd">
                             <label for="floatingInput">Фамилия</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="ivan@mail.ru">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="<?php echo $_SESSION['login'] ?>" name="loginEd">
                             <label for="floatingInput">Email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingPassword" placeholder="Password" value="superIvan1">
+                            <input type="text" class="form-control" id="floatingPassword" placeholder="Password" value="<?php echo $_SESSION['password'] ?>" name="passEd">
                             <label for="floatingPassword">Пароль</label>
                         </div>
                     </div>
                     <div class="modal-footer" id="buttonReg">            
-                            <button type="button" class="btn btn-primary btn-block butReg" data-bs-dismiss="modal" aria-label="Close">Сохранить</button>                                           
+                      <button type="submit" class="btn btn-primary btn-block butReg" data-bs-dismiss="modal" aria-label="Close" name="SubmitEd">Сохранить</button>                                           
                     </div>
+                    </form>
                   </div>
                 </div>
             </div>
@@ -258,33 +295,12 @@ session_start(); ?>
                     </div>
                     <div class="modal-body">
                         <div class="modal-body">
-                          <!-- <div id="carouselPhotoControls" class="carousel slide mb-3" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <img src="image\foto.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="image\foto.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="image\foto.jpg" class="d-block w-100" alt="...">
-                              </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselPhotoControls"  data-bs-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Предыдущий</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselPhotoControls"  data-bs-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Следующий</span>
-                            </button>
-                          </div> -->
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Иван">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Иван" >
                             <label for="floatingInput">Имя</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Иванович">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Иванович" >
                             <label for="floatingInput">Фамилия</label>
                           </div>
                           <div class="form-floating mb-3">
@@ -295,10 +311,25 @@ session_start(); ?>
                             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                             <label for="floatingInput">Email</label>
                           </div>
+                          
                           <div class="form-floating mb-3">
                             <input type="date" class="form-control" id="floatingInput"  name="date" placeholder="Дата" required>
                             <label for="floatingInput">Дата</label>
                           </div>
+                          <div class="mt-5 d-flex justify-content-center">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioCashlessOrder" id="flexRadioCahsOrder1" checked  disabled >
+                            <label class="form-check-label" for="flexRadioCahsOrder1">
+                              Наличные
+                            </label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioCashlessOrder" id="flexRadioCashOrder2"  disabled >
+                            <label class="form-check-label" for="flexRadioCashOrder2">
+                              Безналичные
+                            </label>
+                          </div>
+                        </div>
                         </div>
                     </div>
                     <div class="modal-footer"  id="buttonOrder">
@@ -313,7 +344,7 @@ session_start(); ?>
         </div>
         <?php require('sidePanel.php')?>
         <div class="why_we">
-            
+        <button type="button" class="btn btn-primary" id="submit_newExc" onclick="geoObj()">Сох</button>
           <div class="line"></div>
           <div class="container button_forOrder">
               <button class="btn btn-primary" style="display: none;" id="offcanvasSidep_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidepanel" aria-controls="offcanvasSidepanel">
@@ -345,10 +376,17 @@ session_start(); ?>
           );
         });
       </script>
+      <script type="text/javascript">
+        var toastLiveExample = document.getElementById('liveToast');
+        var toast = new bootstrap.Toast(toastLiveExample);
+        toast.show();
+      </script>
 
     </body>
 </html>
 
 <?php 
 require('newExcurs.php');
+
+/* require('edit.php') */
 ?>
