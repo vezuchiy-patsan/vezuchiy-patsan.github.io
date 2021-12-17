@@ -1,6 +1,7 @@
+
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidepanel" aria-labelledby="offcanvasSid">
 <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasSide"><?php echo "Название экскурсии"?></h5>
+    <h5 class="offcanvas-title" id="offcanvasSide"><?php var_dump($_GET) ?></h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
 </div>
 <div class="offcanvas-body">
@@ -44,7 +45,7 @@
     </div>
     <div>
     <div class="d-flex justify-content-center">
-    <button type="button" class="btn btn-primary mt-5 btn-lg" data-bs-toggle="modal" data-bs-target="#orderModal">Заказать</button>
+    <button type="button" class="btn btn-primary mt-5 btn-lg" data-bs-toggle="modal" data-bs-target="#orderModal" disabled >Заказать</button>
     </div>
     </div>
 </div>

@@ -15,6 +15,7 @@ function init(){
     
     
     if(massiveUrl[massiveUrl.length-1] == 'validateExcursion.php'){
+        var myPlacemark2;
         var myMap2 = new ymaps.Map( "mapApi_order", {
             // Координаты центра карты.
             // Порядок по умолчанию: «широта, долгота».
@@ -32,6 +33,8 @@ function init(){
         [59.729409, 29.862390],
         [60.196089, 30.905570]
         ]});
+        // Слушаем клик на карте.
+       
         var myMap = new ymaps.Map( "mapApi", {
             // Координаты центра карты.
             // Порядок по умолчанию: «широта, долгота».
@@ -77,7 +80,62 @@ function init(){
                 coordinates: coords[0] // координаты точки
             }
         });
-  
+
+        myMap2.events.add('click', function (e) {
+            var coords2 = e.get('coords');
+
+            // Если метка уже создана – просто передвигаем ее.
+            if (myPlacemark2) {
+                myPlacemark2.geometry.setCoordinates(coords2);
+            }
+            // Если нет – создаем.
+            else {
+                myPlacemark2 = createPlacemark(coords2);
+                myMap2.geoObjects.add(myPlacemark2);
+              
+                // Слушаем событие окончания перетаскивания на метке.
+                myPlacemark2.events.add('dragend', function () {
+                    getAddress(myPlacemark2.geometry.getCoordinates());
+                   
+                });
+            }
+            getAddress(coords2);
+            document.getElementById("validationAddressXY").value = coords2;
+           /*  alert(coords2); */
+        });
+
+        // Создание метки.
+        function createPlacemark(coords2) {
+            return new ymaps.Placemark(coords2, {
+                iconCaption: 'поиск...'
+            }, {
+                preset: 'islands#blueIcon',
+                draggable: true
+            });
+        }
+        // Определяем адрес по координатам (обратное геокодирование).
+        function getAddress(coords2) {
+            myPlacemark2.properties.set('iconCaption', 'поиск...');
+            ymaps.geocode(coords2).then(function (res) {
+                var firstGeoObject = res.geoObjects.get(0);
+                
+                
+                myPlacemark2.properties
+                    .set({
+                        // Формируем строку с данными об объекте.
+                        iconCaption: [
+                  
+                        ],
+                        // В качестве контента балуна задаем строку с адресом объекта.
+                        balloonContent: firstGeoObject.getAddressLine()
+                    });
+                
+                document.getElementById("validationAddress").value = firstGeoObject.getAddressLine().substring(8);
+                    
+            });
+            
+            
+        }
         myGeoObject.events.add('click', function () {
                 document.getElementById('offcanvasSidep_btn').click(); // вызвать клик на кнопку;
         });

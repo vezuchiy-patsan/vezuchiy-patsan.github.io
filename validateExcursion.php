@@ -20,7 +20,6 @@ session_start();
       <meta http-equiv="refresh" content="0; url=validationExcursion.php">
       </noscript>
     <?php
-    
     }
     ?>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=9a3a56a6-f665-417b-87b2-b0df644b6e8c&lang=ru_RU" type="text/javascript">
@@ -168,8 +167,9 @@ session_start();
                           <input type="text" class="form-control" placeholder="Экскурсия..." aria-label="Name" aria-describedby="basic-addon1" name="Name" >
                         </div>
                         <div class="mb-3">
-                          <label  class="form-label" id="basic-addon2" >Адрес</label>
-                          <input type="text" class="form-control" id="validationAddress"  placeholder="улица Льва Толстого, 16" aria-label="Address" aria-describedby="basic-addon2" >
+                          <label  class="form-label" id="basic-addon2">Адрес</label>
+                          <input type="text" class="form-control" id="validationAddress"  placeholder="Поставьте точку на карте" aria-label="Address" aria-describedby="basic-addon2" >
+                          <input type="text" class="form-control" id="validationAddressXY"  placeholder="" style="display: none;" name="XY">
                           <div class="invalid-feedback">
                            Укажите действующий город.
                          </div> 
@@ -181,36 +181,26 @@ session_start();
                         <div class="mb-3">
                           <label class="form-label" >Цена</label>
                           <div class="input-group mb-3">
-                            <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="Price">
+                            <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="в рублях" name="Price">
                             <span class="input-group-text">₽</span>
                           </div>
                         </div>
                         <div class="mb-3">
                           <label class="form-label" >Email</label>
-                          <input type="email" class="form-control" aria-label="Email" name="Email"></input>
-                        </div><div class="mb-3">
+                          <input type="email" class="form-control" aria-label="Email" placeholder="email@mail.ru" name="Email"></input>
+                        </div>
+                        <div class="mb-3">
                           <label class="form-label">Телефон</label>
-                          <input type="text" class="form-control" aria-label="Phone" name="Phone"></input>
+                          <input type="text" class="form-control" aria-label="Phone" placeholder="8**********" name="Phone"></input>
                         </div>
                         <div class='mb-3' id='datetimepicker1'>
                           <label class="form-label" >Дата</label>
                           <input type="date" class="form-control" id="dating" name="date" placeholder="Дата">
                         </div>
-                        <div class="mt-5 d-flex justify-content-center">
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="flexRadioCashless" id="flexRadioCahs1" checked  disabled >
-                            <label class="form-check-label" for="flexRadioCahs1">
-                              Наличные
-                            </label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="flexRadioCashless" id="flexRadioCash2"  disabled >
-                            <label class="form-check-label" for="flexRadioCash2">
-                              Безналичные
-                            </label>
-                          </div>
+                        <div class="mb-3">
+                          <label for="floatingInput">Номер счёта (необязательно)</label>
+                          <input type="text" class="form-control" id="floatingInput" placeholder="">
                         </div>
-                        
                       </div>
                       <div class="input-group pt-5">
                           <input type="file" class="form-control " id="inputGroupFile02" multiple>
@@ -223,7 +213,7 @@ session_start();
                       </div>
                     </div>
                     </form>
-                    
+                    <!-- <button type="button" class="btn btn-primary" name="submitExc" onclick="alert(document.getElementById('validationAddressXY').value)">Сохранить</button> -->
                   </div>
                 </div>
               </div>
@@ -333,7 +323,7 @@ session_start();
                         </div>
                     </div>
                     <div class="modal-footer"  id="buttonOrder">
-                      <button type="button" class="btn btn-primary" onclick="alert('Агрегатор')">Заказать</button>
+                      <button type="button" class="btn btn-primary" onclick="alert('Агрегатор')" >Заказать</button>
                     </div>
                   </div>
                 </div>
@@ -356,7 +346,7 @@ session_start();
                 <div class="data_footer">
                     <div class="item"></div>
                     <div class="name_author item"><p>@Ахиян Д.Г.</p></div>
-                    <div class="email item"><p  >roofSPB@mail.ru</p></div>
+                    <div class="email item"><p>roofSPB@mail.ru</p></div>
                 </div>
             </div>
         </footer>
@@ -381,6 +371,9 @@ session_start();
         var toast = new bootstrap.Toast(toastLiveExample);
         toast.show();
       </script>
+    
+      
+ 
 
     </body>
 </html>
