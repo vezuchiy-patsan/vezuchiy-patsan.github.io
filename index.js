@@ -6,7 +6,12 @@ ymaps.ready(init);
 
 
 function init(){
-    var coords = [[59.939098, 30.315868]];
+    /* [59.939098, 30.315868] */
+    var coords = [];
+    //добавим данные из БД
+    for(let i = 0 ; i <= coordsPHP.length; i++){
+        coords.push(coordsPHP[i]);
+    }
     //занесём имя файла
     var fileName = document.documentURI;
     let massiveUrl = fileName.split('/');
@@ -15,45 +20,25 @@ function init(){
     
     
     if(massiveUrl[massiveUrl.length-1] == 'validateExcursion.php'){
-        var myPlacemark2;
-        var myMap2 = new ymaps.Map( "mapApi_order", {
-            // Координаты центра карты.
-            // Порядок по умолчанию: «широта, долгота».
-            // Чтобы не определять координаты центра карты вручную,
-            // воспользуйтесь инструментом Определение координат.
-            center: [59.939098, 30.315868],
-            // Уровень масштабирования. Допустимые значения:
-            // от 0 (весь мир) до 19.
-            zoom: 11,
-            controls: ['zoomControl'] 
-        },{
-        // Зададим ограниченную область прямоугольником, 
-        // примерно описывающим Санкт-Петербург.
-        restrictMapArea: [
-        [59.729409, 29.862390],
-        [60.196089, 30.905570]
-        ]});
-        // Слушаем клик на карте.
-       
-        var myMap = new ymaps.Map( "mapApi", {
-            // Координаты центра карты.
-            // Порядок по умолчанию: «широта, долгота».
-            // Чтобы не определять координаты центра карты вручную,
-            // воспользуйтесь инструментом Определение координат.
-            center: [59.939098, 30.315868],
-            // Уровень масштабирования. Допустимые значения:
-            // от 0 (весь мир) до 19.
-            zoom: 11,
-            controls: ['zoomControl'] 
-        },{
-        // Зададим ограниченную область прямоугольником, 
-        // примерно описывающим Санкт-Петербург.
-        restrictMapArea: [
-        [59.729409, 29.862390],
-        [60.196089, 30.905570]
-        ]});
-    }else{
         var myMap = new ymaps.Map("mapApi", {
+            // Координаты центра карты.
+            // Порядок по умолчанию: «широта, долгота».
+            // Чтобы не определять координаты центра карты вручную,
+            // воспользуйтесь инструментом Определение координат.
+            center: [59.939098, 30.315868],
+            // Уровень масштабирования. Допустимые значения:
+            // от 0 (весь мир) до 19.
+            zoom: 11,
+            controls: ['zoomControl'] 
+        },{
+        // Зададим ограниченную область прямоугольником, 
+        // примерно описывающим Санкт-Петербург.
+        restrictMapArea: [
+        [59.729409, 29.862390],
+        [60.196089, 30.905570]
+        ]});
+        var myPlacemark2;
+        var myMap2 = new ymaps.Map("mapApi_order", {
             // Координаты центра карты.
             // Порядок по умолчанию: «широта, долгота».
             // Чтобы не определять координаты центра карты вручную,
@@ -70,40 +55,27 @@ function init(){
             [59.729409, 29.862390],
             [60.196089, 30.905570]
         ]});
-        
-        }
-        
-        // Создание геообъекта с типом точка (метка).
-        var myGeoObject = new ymaps.GeoObject({
-            geometry: {
-                type: "Point", // тип геометрии - точка
-                coordinates: coords[0] // координаты точки
-            }
-        });
-
         myMap2.events.add('click', function (e) {
-            var coords2 = e.get('coords');
+        var coords2 = e.get('coords');
 
-            // Если метка уже создана – просто передвигаем ее.
-            if (myPlacemark2) {
-                myPlacemark2.geometry.setCoordinates(coords2);
-            }
-            // Если нет – создаем.
-            else {
-                myPlacemark2 = createPlacemark(coords2);
-                myMap2.geoObjects.add(myPlacemark2);
-              
-                // Слушаем событие окончания перетаскивания на метке.
-                myPlacemark2.events.add('dragend', function () {
-                    getAddress(myPlacemark2.geometry.getCoordinates());
-                   
-                });
-            }
-            getAddress(coords2);
-            document.getElementById("validationAddressXY").value = coords2;
-           /*  alert(coords2); */
+        // Если метка уже создана – просто передвигаем ее.
+        if (myPlacemark2) {
+            myPlacemark2.geometry.setCoordinates(coords2);
+        }
+        // Если нет – создаем.
+        else {
+            myPlacemark2 = createPlacemark(coords2);
+            myMap2.geoObjects.add(myPlacemark2);
+            
+            // Слушаем событие окончания перетаскивания на метке.
+            myPlacemark2.events.add('dragend', function () {
+                getAddress(myPlacemark2.geometry.getCoordinates());
+                
+            });
+        }
+        getAddress(coords2);
+        document.getElementById("validationAddressXY").value = coords2;
         });
-
         // Создание метки.
         function createPlacemark(coords2) {
             return new ymaps.Placemark(coords2, {
@@ -113,44 +85,98 @@ function init(){
                 draggable: true
             });
         }
-        // Определяем адрес по координатам (обратное геокодирование).
+    // Определяем адрес по координатам (обратное геокодирование).
         function getAddress(coords2) {
             myPlacemark2.properties.set('iconCaption', 'поиск...');
             ymaps.geocode(coords2).then(function (res) {
                 var firstGeoObject = res.geoObjects.get(0);
-                
-                
                 myPlacemark2.properties
                     .set({
                         // Формируем строку с данными об объекте.
                         iconCaption: [
-                  
+                    
                         ],
                         // В качестве контента балуна задаем строку с адресом объекта.
                         balloonContent: firstGeoObject.getAddressLine()
                     });
-                
                 document.getElementById("validationAddress").value = firstGeoObject.getAddressLine().substring(8);
+            });
+        }
+        
+    }else{
+        var myMap  = new ymaps.Map("mapApi1", {
+            // Координаты центра карты.
+            // Порядок по умолчанию: «широта, долгота».
+            // Чтобы не определять координаты центра карты вручную,
+            // воспользуйтесь инструментом Определение координат.
+            center: [59.939098, 30.315868],
+            // Уровень масштабирования. Допустимые значения:
+            // от 0 (весь мир) до 19.
+            zoom: 11,
+            controls: ['zoomControl'] 
+        },{
+        // Зададим ограниченную область прямоугольником, 
+        // примерно описывающим Санкт-Петербург.
+        restrictMapArea: [
+            [59.729409, 29.862390],
+            [60.196089, 30.905570]
+        ]}); 
+    }
+    // Слушаем клик на карте.
+   
+    // Создание геообъекта с типом точка (метка).
+    var myGeoObject = new ymaps.GeoObjectCollection(
+       {
+        preset: 'islands#blueIcon'
+    });
+
+    for (var i = 0; i < coords.length; i++) {
+        myGeoObject.add(new ymaps.Placemark(coords[i]));
+    }
+    
+    myMap.geoObjects.add(myGeoObject);
+    
+   /*  myMap1.geoObjects.add(myGeoObject); */  
+    
+    
+
+   if(massiveUrl[massiveUrl.length-1] != 'index.php'){
+        myGeoObject.events.add('click', function (e) {
+            var click_coord = e.get('target').geometry.getCoordinates();
+            console.log(click_coord);
+            console.log(myGeoObject.toArray());
+
+            let idPoint;
+            /*document.getElementById("return_XY").value = click_coord; */
+            document.getElementById("offcanvasSidep_btn").click();
+            /* var click_coord = click_coord.map(function(arr){
+                return String(arr);
+            })  */
+            console.log(excursMass);
+            for(let i = 0; i <= excursMass.length; i++){
+                let time_arr = excursMass[i];
+                if (click_coord[0] == excursMass[i][8]){
+                    if(click_coord[1] == excursMass[i][9]){
+                        document.getElementById('offcanvasSide').innerHTML = excursMass[i][2];
+                        document.getElementById('sideDiscription').innerHTML = excursMass[i][2];
+                        document.getElementById('sideDiscription').innerHTML = excursMass[i][3];
+                        document.getElementById('excEmail').innerHTML = excursMass[i][5];
+                        document.getElementById('excPhone').innerHTML = excursMass[i][6];
+                        document.getElementById('excDate').innerHTML = excursMass[i][7];
+                    }
+                    /* idPoint = time_arr.indexOf(click_coord[0]); */
+                    console.log(idPoint);
+                    console.log(Number(click_coord[0]-Number(excursMass[1][8])));
                     
-            });
+                }
+            }
+
             
+            /* $.get('http://p90527sx.beget.tech/validateExcursion.php', {message:message}, function(data)	{
+                alert('Сервер ответил: '+data);
+            }); */
             
-        }
-        myGeoObject.events.add('click', function () {
-                document.getElementById('offcanvasSidep_btn').click(); // вызвать клик на кнопку;
         });
-        // Размещение геообъекта на карте.
-        myMap.geoObjects.add(myGeoObject); 
-        /* myMap2.geoObjects.add(myGeoObject1); */ 
-        document.querySelector("#submit_newExc").onclick = function(){
-            let adres = document.getElementById('validationAddress').value;
-            var newGeocode = ymaps.geocode('Санкт-Петербург, улица Льва Толстого, 10'/* , {
-                boundedBy: myMap.getBounds(),
-                // Жесткое ограничение поиска указанной областью.
-                strictBounds: true
-            } */);
-            newGeocode.then(function(res){
-                myMap.geoObjects.add(res.geoObjects);
-            });
-        }
+        
+    }
 }

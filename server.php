@@ -1,6 +1,6 @@
 <?php
 
-header('Refresh: 6; url=/index.html');
+header("Refresh: 6; url=http://p90527sx.beget.tech/");
 header("Content-Type: text/html; charset=UTF-8");
 /* ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

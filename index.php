@@ -1,3 +1,7 @@
+<?php 
+    require ("points.php");
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,7 +11,7 @@
     
     <script src="https://api-maps.yandex.ru/2.1/?apikey=9a3a56a6-f665-417b-87b2-b0df644b6e8c&lang=ru_RU&mode=debug" type="text/javascript">
     </script>
-   
+    <script type="text/javascript"> let coordsPHP = JSON.parse('<?php echo $json; ?>'); </script>
     <link rel="icon" href="svg\a.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
@@ -125,7 +129,7 @@
             
         </nav>
         <div class="map" >
-            <div class="map_api" id="mapApi" width="1384" height="836" alt="Map">
+            <div class="map_api" id="mapApi1" width="1384" height="836" alt="Map">
             </div>
         </div>
         <div class="why_we">

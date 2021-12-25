@@ -159,6 +159,22 @@ html, body{
     }
 }
 
+.head #notificate{
+	position: absolute;
+    left: 1230px;
+    top: 25px;
+}
+nav #notificateModal .line{
+	margin: 15px auto;
+	width: 450px;
+	border: 0;
+	height: 1px;
+	background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+	background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+	background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+	background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+}
+
 .account_side .accountButton{
 	width: 290px;
 	height:52px;

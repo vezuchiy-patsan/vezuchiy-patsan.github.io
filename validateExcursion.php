@@ -1,8 +1,8 @@
 <?php 
 header("Content-Type: text/html; charset=UTF-8");
 session_start(); 
-
-  
+require ("points.php");
+echo md5('admin');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,11 @@ session_start();
       </noscript>
     <?php
     }
+    
     ?>
+    <script type="text/javascript"> let coordsPHP = JSON.parse('<?php echo $json; ?>'); 
+      let excursMass = JSON.parse('<?php echo $array ?>');
+    </script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=9a3a56a6-f665-417b-87b2-b0df644b6e8c&lang=ru_RU" type="text/javascript">
     </script>
     <link rel="stylesheet" href="daterangepicker/daterangepicker.css">
@@ -69,10 +73,16 @@ session_start();
                           </div>
                     </div>
                     <div class="reg">
-                            <a  class="btn btn-light btn-lg" href="#" role="button">Регистрация</a>
+                      <a  class="btn btn-light btn-lg" href="#" role="button">Регистрация</a>
                     </div>         
                 </div>
+                <button type="button" class="btn btn-link invisible" id="notificate" data-bs-toggle="modal" data-bs-target="#notificateModal">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                  </svg>
+                </button>
                 <div class="account_side">
+                  
                     <div>
                         <button class="btn btn-light accountButton " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_accountSide" aria-expanded="false" aria-controls="collapse_accountSide">
                           <div class="d-flex justify-content-between">
@@ -89,14 +99,46 @@ session_start();
                             <div class="btn-group-vertical" id="buttonGroup" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-outline-dark mb-2" data-bs-toggle="modal" data-bs-target="#data_accModal">Редактировать данные</button>
                                 <button type="button" class="btn btn-outline-dark mb-2" data-bs-toggle="modal" data-bs-target="#exc_newModal">Создать экскурсию</button>
-                                <button type="button" class="btn btn-outline-dark mb-5" data-bs-toggle="modal" data-bs-target="#excursionModal">История заказов</button>
+                                <button type="button" class="btn btn-outline-dark mb-2" data-bs-toggle="modal" data-bs-target="#excursionModal">История заказов</button>
+                                <button type="button" class="btn btn-outline-dark mb-5" data-bs-toggle="modal" data-bs-target="#editExcursionModal">Экскурсии</button>
                                 <a role="button" class="btn btn-outline-dark" href="close.php">Выйти</a>
                               </div>
                         </div>
                       </div>
                 </div>
                 <div  class="excursion_text"><p class="heading">Экскурсии по крышам Санкт-Петербурга</p></div>
-            </div>           
+            </div> 
+            <div class="modal fade" id="notificateModal" tabindex="-1" aria-labelledby="notificateModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="notificateModalLabel">Уведомления</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                  <div class="container">
+                      <div class="row">
+                        <div class="col-10">
+                          <p>Текст уведомления</p> 
+                        </div>
+                        <div class="col">
+                          <p>Дата</p>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="row">
+                        <div class="col-10">
+                          <p>Текст уведомления</p> 
+                        </div>
+                        <div class="col">
+                          <p>Дата</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>          
         </nav>
         <div class="modal fade" id="excursionModal" tabindex="-1" aria-labelledby="excursionModalLabel" aria-hidden="true">
             <div class="modal-dialog .modal-dialog-scrollable modal-lg">
@@ -194,7 +236,7 @@ session_start();
                           <input type="text" class="form-control" aria-label="Phone" placeholder="8**********" name="Phone"></input>
                         </div>
                         <div class='mb-3' id='datetimepicker1'>
-                          <label class="form-label" >Дата</label>
+                          <label class="form-label">Дата</label>
                           <input type="date" class="form-control" id="dating" name="date" placeholder="Дата">
                         </div>
                         <div class="mb-3">
@@ -246,7 +288,7 @@ session_start();
                   <div class="modal-content">
                     <form method="post" action="edit.php">
                     <div class="modal-header ">
-                      <h5 class="modal-title" id="data_accModalLabel">Регистрация</h5>
+                      <h5 class="modal-title" id="data_accModalLabel">Редактировать</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -259,8 +301,8 @@ session_start();
                             <label for="floatingInput">Фамилия</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="<?php echo $_SESSION['login'] ?>" name="loginEd">
-                            <label for="floatingInput">Email</label>
+                          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="<?php echo $_SESSION['login'] ?>" name="loginEd">
+                          <label for="floatingInput">Email</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingPassword" placeholder="Password" value="<?php echo $_SESSION['password'] ?>" name="passEd">
@@ -275,8 +317,77 @@ session_start();
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="editExcursionModal" tabindex="-1" aria-labelledby="editExcursionLabel" aria-hidden="true">
+          <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editExcursionLabel">Экскурсии</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#editExcursData"><?php echo "ID Название экскурсии"?></button>
+                  </div>
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="editExcursData"  tabindex="-1" aria-labelledby="editExcursDataLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="editExcursDataLabel">Экскурсия</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" " aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-body">
+                          <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <label for="EditInput">Название</label>
+                          </div>
+                          <div class="form-floating mb-3">
+                            <textarea class="form-control" aria-label="With textarea" placeholder="короткое описание" name="DiscriptionExc"></textarea>
+                            <label for="EditInput">Описание</label>
+                          </div>
+                          <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <label for="EditInput">Адрес</label>
+                          </div>
+                          <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <label for="EditInput">Цена</label>
+                          </div>
+                          <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="EditInput" placeholder="">
+                            <label for="EditInput">Email</label>
+                          </div>
+                          <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <label for="EditInput">Телефон</label>
+                          </div>
+                          <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="EditInput" placeholder="" >
+                            <label for="EditInput">Дата</label>
+                          </div>
+                          <div class="form-floating mb-3">
+                            
+                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <label for="EditInput">Номер счёта (если вводили)</label>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"  id="buttonOrder">
+                      <button type="button" class="btn btn-primary" >Удалить</button>
+                      <button type="button" class="btn btn-primary" >Сохранить</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
         <div class="map">
-            <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+<!--             <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -327,18 +438,22 @@ session_start();
                     </div>
                   </div>
                 </div>
-            </div>
+            </div> -->
             <div class="map_api" id="mapApi" width="1384" height="836" alt="Map">
 
             </div>
         </div>
         <?php require('sidePanel.php')?>
         <div class="why_we">
-        <button type="button" class="btn btn-primary" id="submit_newExc" onclick="geoObj()">Сох</button>
+        <!-- <button type="button" class="btn btn-primary" id="submit_newExc" onclick="geoObj()">Сох</button> -->
           <div class="line"></div>
           <div class="container button_forOrder">
-              <button class="btn btn-primary" style="display: none;" id="offcanvasSidep_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidepanel" aria-controls="offcanvasSidepanel">
+              
+              <button class="btn btn-primary" style="display: none;" id="offcanvasSidep_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidepanel" aria-controls="offcanvasSidepanel" name="subSide ">
               </button>
+              
+              <input type="text" class="form-control" id="return_XY"  placeholder="" style="display:none;" name="XYreturn">
+              
             </div>
         </div>       
         <footer>
@@ -350,8 +465,12 @@ session_start();
                 </div>
             </div>
         </footer>
-      
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
       <script src="../index.js"></script>
+      <script type="text/javascript">
+                
+                
+      </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
       <script src="daterangepicker/moment.js"></script>
       <script src="daterangepicker/daterangepicker.js">
@@ -382,4 +501,5 @@ session_start();
 require('newExcurs.php');
 
 /* require('edit.php') */
+require ('coord.php');
 ?>
