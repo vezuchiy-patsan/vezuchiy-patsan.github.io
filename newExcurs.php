@@ -89,7 +89,7 @@ if (isset($_POST['submitExc']))
         $id_result = mysqli_query($conn, $sqlID_acc); 
         $id_result = mysqli_fetch_array($id_result);
         $sqlXY = "INSERT INTO Geotag (id, X, Y) VALUES ('$id_result[0]','$XY[0]', '$XY[1]')";
-        print_r($id_result);
+      
         if(mysqli_query($conn, $sqlXY)){
  
             $_SESSION['result_newExc']="Ваши данные успешно добавлены";

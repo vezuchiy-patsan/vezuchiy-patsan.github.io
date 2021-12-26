@@ -1,5 +1,8 @@
 <?php 
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+ini_set('error_reporting', E_ALL);
+header("Content-Type: text/html; charset=UTF-8");
 session_start();
 require ("points.php");
 ?>
@@ -11,13 +14,13 @@ require ("points.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-    if(isset($_POST['submitExc'])){
+    if(isset($_POST['submitExc']) || isset($_POST['SubmitOrder'])){
       ?>
       <script type="text/javascript">
-        location.replace("validateExcursion.php");
+        location.replace("validateMain.php");
       </script>
       <noscript>
-      <meta http-equiv="refresh" content="0; url=validationExcursion.php">
+      <meta http-equiv="refresh" content="0; url=validateMain.php">
       </noscript>
     <?php
     }
@@ -73,7 +76,7 @@ require ("points.php");
                           </div>
                     </div>
                     <div class="reg">
-                            <a  class="btn btn-light btn-lg" href="#" role="button">Регистрация</a>
+                      <a  class="btn btn-light btn-lg" href="#" role="button">Регистрация</a>
                     </div>         
                 </div>
                 <button type="button" class="btn btn-link" id="notificate" data-bs-toggle="modal" data-bs-target="#notificateModal"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
@@ -86,7 +89,7 @@ require ("points.php");
                           <div class="d-flex justify-content-between">
                           <p class="me-3"></p>
                           <p class="m-0"><?php 
-                          $name = $_SESSION['FirstName']." ".$_SESSION['FirstName'];
+                          $name = $_SESSION['FirstName']." ".$_SESSION['Surname'];
                           echo $name ?></p>
                             <div class="arrow-8"></div>
                           </div>
@@ -156,6 +159,7 @@ require ("points.php");
                             <th scope="col">Экскурсовод</th>
                             <th scope="col">Номер экскурсовода</th>
                             <th scope="col">Дата</th>
+                            <th scope="col">Статус</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -168,6 +172,7 @@ require ("points.php");
                             <td>Михайлов</td>
                             <td>89523461702</td>
                             <td>22.10.2021</td>
+                            <td>Бронирование</td>
                           </tr>
                           <tr>
                             <th scope="row">2</th>
@@ -178,6 +183,7 @@ require ("points.php");
                             <td>Михайлов</td>
                             <td>89523461702</td>
                             <td>22.10.2021</td>
+                            <td>Онлайн</td>
                           </tr>
                         </tbody>
                       </table>
@@ -185,7 +191,7 @@ require ("points.php");
               </div>
             </div>
           </div>
-        <div class="data_account">
+          <div class="data_account">
             <div class="modal fade" id="data_accModal" tabindex="-1" aria-labelledby="data_accModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
@@ -219,39 +225,37 @@ require ("points.php");
                   </div>
                 </div>
             </div>
-        </div>
-        <div class="map">
+          </div>
+          <div class="map">
             <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                   <div class="modal-content">
+                  <form action="validateMain.php" method="POST">
                     <div class="modal-header">
                       <h5 class="modal-title" id="orderModalLabel">Заказ</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="modal-body">
+                          <input type="text" style="display:none;" id="idGeotag" name="idGeotag"/>
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Иван">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Иван" name="NameOrder" />
                             <label for="floatingInput">Имя</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Иванович">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Иванович" name="SurNameOrder" />
                             <label for="floatingInput">Фамилия</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Иванович">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Иванович" name="TwoNameOrder" />
                             <label for="floatingInput">Отчество</label>
                           </div>
-<!--                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Email</label>
-                          </div> -->
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput"  name="count" placeholder="Количество">
+                            <input type="text" class="form-control" id="floatingInput"  name="CountOrder" placeholder="Количество" />
                             <label for="floatingInput">Количество</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput"  name="count" placeholder="Номер">
+                            <input type="text" class="form-control" id="floatingInput"  name="PhoneOrder" placeholder="Номер" />
                             <label for="floatingInput">Номер телефона</label>
                           </div>
                           <select class="form-select" aria-label="Default select example">
@@ -274,18 +278,18 @@ require ("points.php");
                               </label>
                             </div>
                           </div>
+                         
                         </div>
                       </div>
                     <div class="modal-footer"  id="buttonOrder">
-                      <button type="button" class="btn btn-primary" onclick="alert('Агрегатор')">Заказать</button>
+                      <button type="submit" class="btn btn-primary" name="SubmitOrder">Заказать</button>
                     </div>
+                  </form>
                   </div>
                 </div>
             </div>
-            
             <div class="map_api" id="mapApi1" width="1384" height="836" alt="Map"></div>
-            
-        </div>
+          </div>
         <?php require('sidePanel.php')?>
         <div class="why_we">
             <div class="line"></div>
@@ -310,3 +314,105 @@ require ("points.php");
     
   </body>
 </html>
+
+<?php 
+  if(isset($_POST['SubmitOrder'])){
+    if(isset($_POST['NameOrder'])){
+      $NameOrder = $_POST['NameOrder'];
+        
+    }else{
+      echo "Имя пусто";
+    };
+    if(isset($_POST['SurNameOrder'])){
+      $SurNameOrder = $_POST['SurNameOrder'];
+    }else{
+      echo "SurNameOrder пусто";
+    };
+    
+    if(isset($_POST['TwoNameOrder'])){
+      $TwoNameOrder = $_POST['TwoNameOrder'];
+    }else{
+      echo "2NameOrder пусто";
+    };
+    
+    if(isset($_POST['CountOrder'])){
+      $CountOrder = $_POST['CountOrder'];
+    }else{
+      echo "CountOrder пусто";
+    };
+    
+    if(isset($_POST['PhoneOrder'])){
+      $PhoneOrder = $_POST['PhoneOrder'];
+    }else{
+      echo "PhoneOrder пусто";
+    };
+    
+    if(isset($_POST['date'])){
+      $date = $_POST['date'];
+    }else{
+      echo "date пусто";
+    };
+    if(isset($_POST['idGeotag'])){
+      $idGeotag = $_POST['idGeotag'];
+    }else{
+      echo "idGeotag пусто";
+    };
+
+    
+    $NameOrder = stripslashes($NameOrder);
+    $NameOrder = htmlspecialchars($NameOrder);
+
+    $SurNameOrder = stripslashes($SurNameOrder);
+    $SurNameOrder =htmlspecialchars($SurNameOrder);
+
+    $TwoNameOrder = stripslashes($TwoNameOrder);
+    $TwoNameOrder = htmlspecialchars($TwoNameOrder);
+
+    $CountOrder = stripslashes($CountOrder);
+    $CountOrder = htmlspecialchars($CountOrder);
+
+    $PhoneOrder = stripslashes($PhoneOrder);
+    $PhoneOrder = htmlspecialchars($PhoneOrder);
+    $status = 0;
+    $dateOrder = date("Y-m-d H:i:s"); 
+
+    require('connect.php');
+
+    if ($conn === false) {
+      $_SESSION['result_order'] = "<p>Ошибка: </p>" . mysqli_connect_error();
+      die();
+      }else{ 
+      /* echo "<p>Подключение успешно установлено</p>"; */
+    };
+    $id_cl = $_SESSION['id'];
+    
+    
+    $sqlOrder = "INSERT INTO History_buy (accountID, ExcursionID, count, status, phone, date) VALUES ('$id_cl','$idGeotag','$CountOrder','$status','$PhoneOrder','$dateOrder')";
+    
+
+    if(mysqli_query($conn, $sqlOrder)){
+      $idORDER = "SELECT id FROM History_buy ORDER BY id DESC LIMIT 1";
+      $id_newOrder = mysqli_query($conn, $idORDER);
+      $id_newOrder = mysqli_fetch_all($id_newOrder);
+      $id_newOrder = $id_newOrder[0][0];
+      $NameExc = "SELECT Name FROM Excursion WHERE id='$idGeotag'";
+      $Discription = mysqli_query($conn, $NameExc);
+      $Discription = mysqli_fetch_all($Discription);
+      $Discription = $Discription[0][0];
+  
+      $sqlNotificate = "INSERT INTO notifications (id, Discription, Time) VALUES ('$id_newOrder','$Discription','$dateOrder')";
+      if(mysqli_query($conn, $sqlNotificate)){
+        mysqli_close($conn);
+        exit;
+      }else{
+        echo mysqli_error($conn);
+        mysqli_close($conn);
+        exit;
+      }
+    }else{
+      echo mysqli_error($conn);
+      mysqli_close($conn);
+      exit;
+    }
+  }
+?>

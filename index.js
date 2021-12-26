@@ -157,9 +157,11 @@ function init(){
                 let time_arr = excursMass[i];
                 if (click_coord[0] == excursMass[i][8]){
                     if(click_coord[1] == excursMass[i][9]){
+                        document.getElementById('idGeotag').value = excursMass[i][0];
                         document.getElementById('offcanvasSide').innerHTML = excursMass[i][2];
                         document.getElementById('sideDiscription').innerHTML = excursMass[i][2];
                         document.getElementById('sideDiscription').innerHTML = excursMass[i][3];
+                        document.getElementById('excName').innerHTML = excursMass[i][10] + " " + excursMass[i][11];
                         document.getElementById('excEmail').innerHTML = excursMass[i][5];
                         document.getElementById('excPhone').innerHTML = excursMass[i][6];
                         document.getElementById('excDate').innerHTML = excursMass[i][7];

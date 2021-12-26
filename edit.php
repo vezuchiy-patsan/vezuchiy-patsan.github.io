@@ -1,7 +1,7 @@
 <?php 
 header("Content-Type: text/html; charset=UTF-8");
 session_start();
-$url = "/index.php";
+$url = "http://p90527sx.beget.tech/";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('error_reporting', E_ALL);
