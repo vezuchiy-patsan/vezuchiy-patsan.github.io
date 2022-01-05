@@ -1,10 +1,14 @@
 <?php 
-ini_set('display_errors', 1);
+/* ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('error_reporting', E_ALL);
-header("Content-Type: text/html; charset=UTF-8");
+header("Content-Type: text/html; charset=UTF-8"); */
 session_start();
 require ("points.php");
+require("notif.php");
+require("history.php");
+
+$array = json_encode($array);
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +32,7 @@ require ("points.php");
     ?>
     <script type="text/javascript"> let coordsPHP = JSON.parse('<?php echo $json; ?>'); 
       let excursMass = JSON.parse('<?php echo $array ?>');
+      let historyMass = JSON.parse('<?php echo $array_with_coordiantes ?>');
     </script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=9a3a56a6-f665-417b-87b2-b0df644b6e8c&lang=ru_RU&mode=debug" type="text/javascript">
     </script>
@@ -99,7 +104,7 @@ require ("points.php");
                         <div class="card card-body mt-3" >
                             <div class="btn-group-vertical" id="buttonGroup" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-outline-dark mb-2" data-bs-toggle="modal" data-bs-target="#data_accModal">Редактировать данные</button>
-                                <button type="button" class="btn btn-outline-dark mb-5" data-bs-toggle="modal" data-bs-target="#excursionModal">История покупок</button>
+                                <button type="button" class="btn btn-outline-dark mb-5" data-bs-toggle="modal" data-bs-target="#excursionModal" id="history_list">История покупок</button>
                                 <a role="button" class="btn btn-outline-dark" href="close.php" name="exit">Выйти</a>
                               </div>
                         </div>
@@ -118,37 +123,48 @@ require ("points.php");
                   <div class="modal-body">
                   <div class="container">
                       <div class="row">
-                        <div class="col-10">
-                          <p>Текст уведомления</p> 
-                        </div>
-                        <div class="col">
-                          <p>Дата</p>
-                        </div>
-                      </div>
-                      <div class="line"></div>
-                      <div class="row">
-                        <div class="col-10">
-                          <p>Текст уведомления</p> 
-                        </div>
-                        <div class="col">
-                          <p>Дата</p>
-                        </div>
-                      </div>
+                        <?php 
+                        if(isset($notif_arr[0])){
+                          for($i = 0 ; $i < count($notif_arr); $i++){
+                          ?>
+                            <div class="col-7">
+                            <?php
+                            $arr_n = $notif_arr[$i][1];
+                            echo "<p>Заказ экскурсии: $arr_n</p>";
+                            ?>
+                            </div>
+                            <div class="col-5">
+                          <?php
+                            $arr_d = $notif_arr[$i][2];
+                            echo "<p class='text-end'>$arr_d</p>";
+                          ?>
+                            </div>
+                            <div class="line"></div>
+                          <?php
+                            }
+                          }else{
+                            echo "<p class='text-center'>Уведомлений нет.</p>";
+                          }
+                        ?>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </nav>
         <div class="modal fade" id="excursionModal" tabindex="-1" aria-labelledby="excursionModalLabel" aria-hidden="true">
-            <div class="modal-dialog .modal-dialog-scrollable modal-lg">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="excursionModalLabel">История покупок</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body table-responsive">
-                    <table class="table table-striped table-hover">
+                  <?php 
+                    if(isset($history_excursion_arr[0])){
+                      ?>
+                        <table class="table table-striped table-hover">
                         <thead class="table-dark">
                           <tr>
                             <th scope="col">#</th>
@@ -163,30 +179,34 @@ require ("points.php");
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Живописная</td>
-                            <td>Бухаресткая 25</td>
-                            <td>1</td>
-                            <td>150</td>
-                            <td>Михайлов</td>
-                            <td>89523461702</td>
-                            <td>22.10.2021</td>
-                            <td>Бронирование</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Живописная</td>
-                            <td>Бухаресткая 25</td>
-                            <td>2</td>
-                            <td>300</td>
-                            <td>Михайлов</td>
-                            <td>89523461702</td>
-                            <td>22.10.2021</td>
-                            <td>Онлайн</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                          
+                          <?php
+                            for($i=0; $i < count($array_for_history); $i++){
+                              $c = $i + 1;
+                              echo "<tr>";
+                              echo "<th scope='row'>$c</th>";
+                              ?>
+                              <td><?php echo ($array_for_history[$i][1]) ?></td>
+                              <td id="<?= 'Addres'.$c ?>"></td>
+                              <td><?=  $history_buy[$i][1]?></td>
+                              <td><?= $history_excursion_arr[$i][3]*$history_buy[$i][1]?></td>
+                              <td><?= $array_for_history[$i][4]." ".$array_for_history[$i][5]?></td>
+                              <td><?= $array_for_history[$i][3]?></td>
+                              <td><?= $history_buy[$i][3] ?></td>
+                              <td><?php if($history_buy[$i][2] == 0){echo "Бронирование";}else{echo "Онлайн";};?></td>
+                            </tr>
+                              <?php
+                            }  
+
+                          ?>
+                      </tbody>
+                    </table>
+                      <?php
+                    }else {
+                      echo "<p class='text-center'>Нет заказов.</p>";
+                    }
+                  ?>
+                    
                 </div>
               </div>
             </div>

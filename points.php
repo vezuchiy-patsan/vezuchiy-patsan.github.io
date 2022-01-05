@@ -43,7 +43,7 @@ ini_set('error_reporting', E_ALL);   */
         }
     }
     
+
     
-    $array = json_encode($array);
     mysqli_close($conn);
 ?>

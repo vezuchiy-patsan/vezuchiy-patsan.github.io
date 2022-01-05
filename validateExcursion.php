@@ -2,7 +2,9 @@
 header("Content-Type: text/html; charset=UTF-8");
 session_start(); 
 require ("points.php");
-echo md5('admin');
+require("history.php");
+print_r($array);
+$array = json_encode($array);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -141,7 +143,7 @@ echo md5('admin');
             </div>          
         </nav>
         <div class="modal fade" id="excursionModal" tabindex="-1" aria-labelledby="excursionModalLabel" aria-hidden="true">
-            <div class="modal-dialog .modal-dialog-scrollable modal-lg">
+            <div class="modal-dialog .modal-dialog-scrollable modal-xl">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="excursionModalLabel">История заказов</h5>
@@ -159,6 +161,7 @@ echo md5('admin');
                             <th scope="col">Клиент</th>
                             <th scope="col">Номер клиента</th>
                             <th scope="col">Дата</th>
+                            <th scope="col">Статус</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -171,6 +174,7 @@ echo md5('admin');
                             <td>Михайлов</td>
                             <td>89523461702</td>
                             <td>22.10.2021</td>
+                            <td>Бронирование</td>
                           </tr>
                           <tr>
                             <th scope="row">2</th>
@@ -181,6 +185,7 @@ echo md5('admin');
                             <td>Михайлов</td>
                             <td>89523461702</td>
                             <td>22.10.2021</td>
+                            <td>Бронирование</td>
                           </tr>
                         </tbody>
                       </table>
@@ -468,7 +473,6 @@ echo md5('admin');
       <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
       <script src="../index.js"></script>
       <script type="text/javascript">
-                
                 
       </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>

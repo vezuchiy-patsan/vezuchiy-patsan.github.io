@@ -137,8 +137,18 @@ function init(){
     myMap.geoObjects.add(myGeoObject);
     
    /*  myMap1.geoObjects.add(myGeoObject); */  
-    
-    
+/*     history_list.onclick = function (){
+        let adr_count;
+        for(let i = 0; i <= historyMass.length; i++){
+            ymaps.geocode(historyMass[i]).then(function (res) {
+                var historyGeoObject = res.geoObjects.get(0);
+
+                adr_count = "Addres"+String(i+1);
+                document.getElementById(adr_count).innerHTML = historyGeoObject.getAddressLine().substring(25);
+            })
+        };
+    };
+ */
 
    if(massiveUrl[massiveUrl.length-1] != 'index.php'){
         myGeoObject.events.add('click', function (e) {
@@ -157,7 +167,10 @@ function init(){
                 let time_arr = excursMass[i];
                 if (click_coord[0] == excursMass[i][8]){
                     if(click_coord[1] == excursMass[i][9]){
-                        document.getElementById('idGeotag').value = excursMass[i][0];
+                        if(massiveUrl[massiveUrl.length-1] != 'validateExcursion.php'){
+                            document.getElementById('idGeotag').value = excursMass[i][0];
+                        }
+                        
                         document.getElementById('offcanvasSide').innerHTML = excursMass[i][2];
                         document.getElementById('sideDiscription').innerHTML = excursMass[i][2];
                         document.getElementById('sideDiscription').innerHTML = excursMass[i][3];
@@ -165,6 +178,8 @@ function init(){
                         document.getElementById('excEmail').innerHTML = excursMass[i][5];
                         document.getElementById('excPhone').innerHTML = excursMass[i][6];
                         document.getElementById('excDate').innerHTML = excursMass[i][7];
+                        
+                        
                     }
                     /* idPoint = time_arr.indexOf(click_coord[0]); */
                     console.log(idPoint);

@@ -56,10 +56,11 @@ else {
     if ($myrow['pass']==$password) {
         //если пароли совпадают, то запускаем пользователю сессию! Можете его поздравить, он вошел!
         $_SESSION['login']=$myrow['login']; 
-        $_SESSION['id']=$myrow['id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
+        $_SESSION['id']=$myrow['id'];//эти данные очень часто используются, вот их и будем "носить с собой" вошедший пользователь
         $_SESSION['FirstName']=$accountFirstName;
         $_SESSION['Surname']=$accountSurname;
         $_SESSION['password']=$password;
+        $_SESSION['type'] = $sqlID['type'];
         if ($sqlID['type'] == 1){
             /* echo "Вы успешно вошли на сайт! <a href='validateExcursion.html'>Главная страница</a>"; */
             header("Location:" .$urlEx);
