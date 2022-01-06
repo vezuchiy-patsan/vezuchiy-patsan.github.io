@@ -30,21 +30,25 @@
         </button>
         </div>
     <div>
-        <div class="decrcipt mt-3">
+    <div class="decrcipt mt-3">
         <strong class="">Описание</strong>
         <p id="sideDiscription"></p>
-        
-        </div>
-        <div class="exc mt-3">
+    </div>
+    <div class="Price mt-3">
+        <strong>Цена</strong>
+        <p id="excPrice"></p>
+    </div>
+    <div class="exc mt-3">
         <strong class="mt-3">Экскурсовод</strong>
         <p id="excName"></p>
         <p id="excEmail"></p>
         <p id="excPhone"></p>
-        </div>
-        <div class="dateTime mt-3">
+        
+    </div>
+    <div class="dateTime mt-3">
         <strong class="mt-3">Дата и время</strong>
         <p id="excDate"></p>
-        </div>
+    </div>
     </div>
     </div>
     <div>

@@ -137,7 +137,7 @@ function init(){
     myMap.geoObjects.add(myGeoObject);
     
    /*  myMap1.geoObjects.add(myGeoObject); */  
-/*     history_list.onclick = function (){
+    history_list.onclick = function (){
         let adr_count;
         for(let i = 0; i <= historyMass.length; i++){
             ymaps.geocode(historyMass[i]).then(function (res) {
@@ -148,7 +148,7 @@ function init(){
             })
         };
     };
- */
+
 
    if(massiveUrl[massiveUrl.length-1] != 'index.php'){
         myGeoObject.events.add('click', function (e) {
@@ -178,6 +178,8 @@ function init(){
                         document.getElementById('excEmail').innerHTML = excursMass[i][5];
                         document.getElementById('excPhone').innerHTML = excursMass[i][6];
                         document.getElementById('excDate').innerHTML = excursMass[i][7];
+                        document.getElementById('excPrice').innerHTML = excursMass[i][4]+" рублей";
+
                         
                         
                     }
