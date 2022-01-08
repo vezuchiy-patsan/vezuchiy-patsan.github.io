@@ -149,6 +149,33 @@ function init(){
         };
     };
 
+    if(massiveUrl[massiveUrl.length-1] == 'validateExcursion.php'){
+        const el = document.querySelector('.buttonExc');
+        function getBut(e){
+            var id_el = e.target.id;
+            var letters = id_el.replace(/\D/g, ""); 
+            
+            exc_history.forEach(function(item, index){
+                
+                if(item[0].indexOf(Number(letters)) != -1){
+                    document.getElementById("edExc_Name").value = item[2];
+                    document.getElementById("edExcT").innerHTML = item[3];
+                    let getCoor = [item[8], item[9]];
+                    ymaps.geocode(getCoor).then(function(res){ var historyCoor = res.geoObjects.get(0); document.getElementById("edExcAddr").value = historyCoor.getAddressLine().substring(25);});
+                    document.getElementById("edExcPr").value = item[4];
+                    document.getElementById("edExcEm").value = item[5];
+                    document.getElementById("edExcPh").value = item[6];
+                    document.getElementById("edExc_date").value = item[7];
+                }
+                    
+            });
+        }
+        el.addEventListener("click", getBut);
+    }
+
+ 
+
+
 
    if(massiveUrl[massiveUrl.length-1] != 'index.php'){
         myGeoObject.events.add('click', function (e) {
@@ -178,7 +205,7 @@ function init(){
                         document.getElementById('excEmail').innerHTML = excursMass[i][5];
                         document.getElementById('excPhone').innerHTML = excursMass[i][6];
                         document.getElementById('excDate').innerHTML = excursMass[i][7];
-                        document.getElementById('excPrice').innerHTML = excursMass[i][4]+" рублей";
+                        document.getElementById('excPrice').innerHTML = excursMass[i][4]+" RUB";
 
                         
                         

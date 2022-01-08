@@ -69,7 +69,7 @@ if($_SESSION['type'] == 0){
                     
                     foreach($excursion_history as $val_coor){
                         $arr_coord = array();
-                        print_r($list_order_query[0][2]);
+
                         if($val_coor[0] == $list_order_query[0][2]){
 
                             array_push($arr_coord, $val_coor[8], $val_coor[9]);
@@ -98,14 +98,14 @@ if($_SESSION['type'] == 0){
             }
         }
     }
-    
-    print("<br>");
+    $exc_list = json_encode($excursion_history);
+/*     print("<br>");
     print("Список экскурсий аккаунта<br>");
     print_r($excursion_history);
     print("<br>Список покупок <br>");
     print_r($excursion_order);
     echo "<br>";
-    print_r($excursion_coord);
+    print_r($excursion_coord); */
     $excursion_coord = json_encode($excursion_coord);
 }
 ?>

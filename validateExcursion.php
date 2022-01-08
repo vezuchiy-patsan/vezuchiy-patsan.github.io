@@ -1,10 +1,9 @@
 <?php 
-
 header("Content-Type: text/html; charset=UTF-8");
 session_start(); 
 require ("points.php");
 require("history.php");
-print_r($array);
+/* print_r($array); */
 $array = json_encode($array);
 ?>
 <!DOCTYPE html>
@@ -29,6 +28,7 @@ $array = json_encode($array);
     <script type="text/javascript"> let coordsPHP = JSON.parse('<?php echo $json; ?>'); 
       let excursMass = JSON.parse('<?php echo $array ?>');
       let historyMass = JSON.parse('<?php echo $excursion_coord ?>');
+      var exc_history = JSON.parse('<?php echo $exc_list?>');
     </script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=9a3a56a6-f665-417b-87b2-b0df644b6e8c&lang=ru_RU" type="text/javascript">
     </script>
@@ -340,9 +340,23 @@ $array = json_encode($array);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <div class="d-grid gap-2">
-                  <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#editExcursData"><?php echo "ID Название экскурсии"?></button>
-                  </div>
+                <div class="d-grid gap-2 buttonExc" id="">
+               
+                  <?php 
+                    foreach($excursion_history as $key => $excursion){
+                      $number = $excursion[0]; 
+                      $id = "Exc".$number;
+                      ?>
+                      <button class='btn btn-outline-dark' id='<?= $id?>' type='button' data-bs-toggle='modal' data-bs-target='#editExcursData' onClick="">
+                      <?php
+                      echo "<div class='row' id='$id'>";
+                      echo "<div class='col-3' id='$id'><p class='text-start' id='$id'>$key</p></div>"; 
+                      echo "<div class='col-6' id='$id'><p class='text-center' id='$id'>$excursion[2]</p></div></div></button>";
+                        
+                    }
+                  ?>
+                  
+                </div>
               </div>
               <div class="modal-footer">
               </div>
@@ -359,36 +373,36 @@ $array = json_encode($array);
                     <div class="modal-body">
                         <div class="modal-body">
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <input type="text" class="form-control" id="edExc_Name" placeholder="">
                             <label for="EditInput">Название</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <textarea class="form-control" aria-label="With textarea" placeholder="короткое описание" name="DiscriptionExc"></textarea>
+                            <textarea class="form-control" aria-label="With textarea" placeholder="" id="edExcT" name="DiscriptionExc"></textarea>
                             <label for="EditInput">Описание</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <input type="text" class="form-control" id="edExcAddr" placeholder="">
                             <label for="EditInput">Адрес</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <input type="text" class="form-control" id="edExcPr" placeholder="">
                             <label for="EditInput">Цена</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="EditInput" placeholder="">
+                            <input type="email" class="form-control" id="edExcEm" placeholder="">
                             <label for="EditInput">Email</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <input type="text" class="form-control" id="edExcPh" placeholder="">
                             <label for="EditInput">Телефон</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="EditInput" placeholder="" >
+                            <input type="text" class="form-control" id="edExc_date" placeholder="" >
                             <label for="EditInput">Дата</label>
                           </div>
                           <div class="form-floating mb-3">
                             
-                            <input type="text" class="form-control" id="EditInput" placeholder="">
+                            <input type="text" class="form-control" id="edExc_accNumber" placeholder="" disabled>
                             <label for="EditInput">Номер счёта (если вводили)</label>
                           </div>
                         </div>
